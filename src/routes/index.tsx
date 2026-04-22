@@ -186,7 +186,7 @@ function TeaserPage() {
         {/* Headline + email — vertically centered in remaining space */}
         <div className="flex flex-1 flex-col items-center justify-center gap-6 pb-24 text-center sm:gap-8">
           <h1
-            className="rizz-fade-up text-[var(--cream)]"
+            className="rizz-fade-up text-4xl text-[var(--cream)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 300,
@@ -196,15 +196,11 @@ function TeaserPage() {
               textShadow: "0 2px 30px rgba(0,0,0,0.4)",
             }}
           >
-            <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-              Something{" "}
-              <span style={{ fontWeight: 500, fontStyle: "italic" }}>
-                Playfully Luxurious
-              </span>
-            </span>
-            <span className="mt-2 block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-              is coming.
-            </span>
+            Something{" "}
+            <em style={{ fontWeight: 500, fontStyle: "italic" }}>
+              Playfully Luxurious
+            </em>{" "}
+            is coming.
           </h1>
 
           {/* Email capture */}
