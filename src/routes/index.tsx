@@ -2,16 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
 import logo from "@/assets/RIZZ_Manta_Ray_logo-02.png";
-import header1 from "@/assets/Header_1.jpg";
-import header2 from "@/assets/Header_2.jpg";
 import header3 from "@/assets/Header_3.jpg";
 import header4 from "@/assets/Header_4.jpg";
 import header5 from "@/assets/Header_5.jpg";
-import header6 from "@/assets/Header_6.jpg";
-import header7 from "@/assets/Header_7.jpg";
 import header8 from "@/assets/Header_8.jpg";
 
-const HEADERS = [header1, header2, header3, header4, header5, header6, header7, header8];
+const HEADERS = [header3, header4, header5, header8];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,8 +24,8 @@ export const Route = createFileRoute("/")({
         content:
           "Something playfully luxurious is coming to Pattaya. Sign up for early access.",
       },
-      { property: "og:image", content: header1 },
-      { name: "twitter:image", content: header1 },
+      { property: "og:image", content: header5 },
+      { name: "twitter:image", content: header5 },
       { name: "twitter:title", content: "RIZZ Manta Ray — Coming Soon" },
       {
         name: "twitter:description",
@@ -149,7 +145,7 @@ function TeaserPage() {
         </div>
 
         {/* Headline + email — vertically centered in remaining space */}
-        <div className="flex flex-1 flex-col items-center justify-center gap-12 pb-24 text-center sm:gap-16">
+        <div className="flex flex-1 flex-col items-center justify-center gap-8 pb-24 text-center sm:gap-10">
           <h1
             className="rizz-fade-up italic text-[var(--cream)]"
             style={{
@@ -161,80 +157,88 @@ function TeaserPage() {
               textShadow: "0 2px 30px rgba(0,0,0,0.4)",
             }}
           >
-            <span className="block text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl">
+            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
               Something Playfully Luxurious
             </span>
-            <span className="mt-2 block text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl">
+            <span className="mt-2 block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
               is coming.
             </span>
           </h1>
 
           {/* Email capture */}
           <div
-            className="rizz-fade-up w-full max-w-md"
+            className="rizz-fade-up w-full max-w-lg"
             style={{ animationDelay: "1s" }}
           >
             {submitted ? (
-              <p
-                className="italic text-[var(--cream)]"
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "1.5rem",
-                  fontWeight: 300,
-                }}
+              <div
+                className="border bg-black/30 p-6 backdrop-blur-md sm:p-8"
+                style={{ borderColor: "rgba(249,247,239,0.4)" }}
               >
-                You&apos;re on the list.
-              </p>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-col gap-3 sm:flex-row sm:gap-0"
-              >
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    if (error) setError(false);
+                <p
+                  className="italic text-[var(--cream)]"
+                  style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: "1.5rem",
+                    fontWeight: 300,
                   }}
-                  placeholder="Enter your email for early access"
-                  aria-label="Email address"
-                  className="h-12 flex-1 border bg-white/5 px-4 text-sm text-[var(--cream)] backdrop-blur-md outline-none transition-colors placeholder:text-[color:rgba(249,247,239,0.4)] focus:bg-white/10"
+                >
+                  You&apos;re on the list.
+                </p>
+              </div>
+            ) : (
+              <div
+                className="border bg-black/30 p-6 backdrop-blur-md sm:p-8"
+                style={{ borderColor: "rgba(249,247,239,0.4)" }}
+              >
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col gap-3 sm:flex-row sm:gap-0"
+                >
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (error) setError(false);
+                    }}
+                    placeholder="Enter your email for early access"
+                    aria-label="Email address"
+                    className="h-14 flex-1 border bg-white/15 px-4 text-sm text-[var(--cream)] backdrop-blur-md outline-none transition-colors placeholder:text-[color:rgba(249,247,239,0.65)] focus:bg-white/20"
+                    style={{
+                      fontFamily: "'Work Sans', sans-serif",
+                      fontWeight: 300,
+                      letterSpacing: "0.02em",
+                      borderColor: error
+                        ? "var(--copper-rose)"
+                        : "rgba(249,247,239,0.6)",
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    className="h-14 border border-[var(--cream)] bg-[var(--cream)] px-8 text-xs uppercase text-[var(--rizz-bg)] transition-all duration-300 hover:border-[var(--copper-rose)] hover:bg-[var(--copper-rose)] hover:text-[var(--cream)] sm:border-l-0"
+                    style={{
+                      fontFamily: "'Work Sans', sans-serif",
+                      fontWeight: 500,
+                      letterSpacing: "0.2em",
+                    }}
+                  >
+                    Notify Me
+                  </button>
+                </form>
+                <p
+                  className="mt-4 text-[color:rgba(249,247,239,0.75)]"
                   style={{
                     fontFamily: "'Work Sans', sans-serif",
                     fontWeight: 300,
+                    fontSize: "0.875rem",
                     letterSpacing: "0.02em",
-                    borderColor: error
-                      ? "var(--copper-rose)"
-                      : "rgba(249,247,239,0.3)",
-                  }}
-                />
-                <button
-                  type="submit"
-                  className="group h-12 border border-[color:rgba(249,247,239,0.6)] bg-transparent px-8 text-xs uppercase text-[var(--cream)] transition-all duration-300 hover:border-[var(--copper-rose)] hover:text-[var(--copper-rose)] sm:border-l-0"
-                  style={{
-                    fontFamily: "'Work Sans', sans-serif",
-                    fontWeight: 400,
-                    letterSpacing: "0.2em",
                   }}
                 >
-                  Notify Me
-                </button>
-              </form>
-            )}
-            {!submitted && (
-              <p
-                className="mt-4 text-[color:rgba(249,247,239,0.5)]"
-                style={{
-                  fontFamily: "'Work Sans', sans-serif",
-                  fontWeight: 300,
-                  fontSize: "0.8125rem",
-                  letterSpacing: "0.02em",
-                }}
-              >
-                Be the first to know when we open.
-              </p>
+                  Be the first to know when we open.
+                </p>
+              </div>
             )}
           </div>
         </div>
