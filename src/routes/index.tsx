@@ -157,10 +157,13 @@ function TeaserPage() {
               textShadow: "0 2px 30px rgba(0,0,0,0.4)",
             }}
           >
-            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-              Something Playfully Luxurious
+            <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+              Something{" "}
+              <span style={{ fontWeight: 600, fontStyle: "italic" }}>
+                Playfully Luxurious
+              </span>
             </span>
-            <span className="mt-2 block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+            <span className="mt-2 block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
               is coming.
             </span>
           </h1>
@@ -171,7 +174,7 @@ function TeaserPage() {
             style={{ animationDelay: "1s" }}
           >
             {submitted ? (
-              <div className="rounded-2xl bg-[#B87261] p-6 sm:p-8">
+              <div className="rounded-2xl border border-white/20 bg-[#B87261]/85 p-6 shadow-2xl shadow-black/20 backdrop-blur-md sm:p-8">
                 <p
                   className="text-[var(--cream)]"
                   style={{
@@ -184,7 +187,7 @@ function TeaserPage() {
                 </p>
               </div>
             ) : (
-              <div className="rounded-2xl bg-[#B87261] p-6 sm:p-8">
+              <div className="rounded-2xl border border-white/20 bg-[#B87261]/85 p-6 shadow-2xl shadow-black/20 backdrop-blur-md sm:p-8">
                 <form
                   onSubmit={handleSubmit}
                   className="flex flex-col gap-3 sm:flex-row"
