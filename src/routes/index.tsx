@@ -24,8 +24,8 @@ export const Route = createFileRoute("/")({
         content:
           "Something playfully luxurious is coming to Pattaya. Sign up for early access.",
       },
-      { property: "og:image", content: header1 },
-      { name: "twitter:image", content: header1 },
+      { property: "og:image", content: header5 },
+      { name: "twitter:image", content: header5 },
       { name: "twitter:title", content: "RIZZ Manta Ray — Coming Soon" },
       {
         name: "twitter:description",
