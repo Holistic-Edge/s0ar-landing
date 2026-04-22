@@ -105,13 +105,32 @@ function TeaserPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!EMAIL_RE.test(email.trim())) {
-      setError(true);
-      return;
-    }
-    setError(false);
+    const trimmedName = name.trim();
+    const trimmedPhone = phone.trim();
+    const phoneDigits = trimmedPhone.replace(/[^\d]/g, "");
+    const phoneValid =
+      /^[\d\s-]+$/.test(trimmedPhone) &&
+      phoneDigits.length >= 6 &&
+      phoneDigits.length <= 20;
+    const next: FieldErrors = {
+      name: !(trimmedName.length > 0 && trimmedName.length <= 100),
+      phone: !phoneValid,
+      email: !EMAIL_RE.test(email.trim()),
+    };
+    setErrors(next);
+    if (next.name || next.phone || next.email) return;
     setSubmitted(true);
   }
+
+  const inputBaseClass =
+    "h-14 w-full rounded-lg border bg-white/20 px-4 text-sm text-[var(--cream)] outline-none transition-colors placeholder:text-[color:rgba(249,247,239,0.8)] focus:bg-white/30";
+  const inputBaseStyle: React.CSSProperties = {
+    fontFamily: "'Work Sans', sans-serif",
+    fontWeight: 300,
+    letterSpacing: "0.02em",
+  };
+  const borderFor = (hasError?: boolean) =>
+    hasError ? "var(--rizz-bg)" : "rgba(249,247,239,0.5)";
 
   return (
     <main
