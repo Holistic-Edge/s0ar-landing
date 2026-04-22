@@ -147,7 +147,7 @@ function TeaserPage() {
         {/* Headline + email — vertically centered in remaining space */}
         <div className="flex flex-1 flex-col items-center justify-center gap-8 pb-24 text-center sm:gap-10">
           <h1
-            className="rizz-fade-up italic text-[var(--cream)]"
+            className="rizz-fade-up text-[var(--cream)]"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 300,
@@ -171,12 +171,9 @@ function TeaserPage() {
             style={{ animationDelay: "1s" }}
           >
             {submitted ? (
-              <div
-                className="border bg-black/30 p-6 backdrop-blur-md sm:p-8"
-                style={{ borderColor: "rgba(249,247,239,0.4)" }}
-              >
+              <div className="rounded-2xl bg-[#B87261] p-6 sm:p-8">
                 <p
-                  className="italic text-[var(--cream)]"
+                  className="text-[var(--cream)]"
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
                     fontSize: "1.5rem",
@@ -187,13 +184,10 @@ function TeaserPage() {
                 </p>
               </div>
             ) : (
-              <div
-                className="border bg-black/30 p-6 backdrop-blur-md sm:p-8"
-                style={{ borderColor: "rgba(249,247,239,0.4)" }}
-              >
+              <div className="rounded-2xl bg-[#B87261] p-6 sm:p-8">
                 <form
                   onSubmit={handleSubmit}
-                  className="flex flex-col gap-3 sm:flex-row sm:gap-0"
+                  className="flex flex-col gap-3 sm:flex-row"
                 >
                   <input
                     type="email"
@@ -205,19 +199,19 @@ function TeaserPage() {
                     }}
                     placeholder="Enter your email for early access"
                     aria-label="Email address"
-                    className="h-14 flex-1 border bg-white/15 px-4 text-sm text-[var(--cream)] backdrop-blur-md outline-none transition-colors placeholder:text-[color:rgba(249,247,239,0.65)] focus:bg-white/20"
+                    className="h-14 flex-1 rounded-lg border bg-white/20 px-4 text-sm text-[var(--cream)] outline-none transition-colors placeholder:text-[color:rgba(249,247,239,0.8)] focus:bg-white/30"
                     style={{
                       fontFamily: "'Work Sans', sans-serif",
                       fontWeight: 300,
                       letterSpacing: "0.02em",
                       borderColor: error
-                        ? "var(--copper-rose)"
-                        : "rgba(249,247,239,0.6)",
+                        ? "var(--rizz-bg)"
+                        : "rgba(249,247,239,0.5)",
                     }}
                   />
                   <button
                     type="submit"
-                    className="h-14 border border-[var(--cream)] bg-[var(--cream)] px-8 text-xs uppercase text-[var(--rizz-bg)] transition-all duration-300 hover:border-[var(--copper-rose)] hover:bg-[var(--copper-rose)] hover:text-[var(--cream)] sm:border-l-0"
+                    className="h-14 rounded-lg bg-[var(--cream)] px-8 text-xs uppercase text-[var(--rizz-bg)] transition-all duration-300 hover:bg-[var(--rizz-bg)] hover:text-[var(--cream)]"
                     style={{
                       fontFamily: "'Work Sans', sans-serif",
                       fontWeight: 500,
@@ -228,7 +222,7 @@ function TeaserPage() {
                   </button>
                 </form>
                 <p
-                  className="mt-4 text-[color:rgba(249,247,239,0.75)]"
+                  className="mt-4 text-[color:rgba(249,247,239,0.9)]"
                   style={{
                     fontFamily: "'Work Sans', sans-serif",
                     fontWeight: 300,
