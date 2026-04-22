@@ -39,12 +39,32 @@ export const Route = createFileRoute("/")({
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const COUNTRY_CODES = [
+  { code: "+66", label: "🇹🇭 +66" },
+  { code: "+1", label: "🇺🇸 +1" },
+  { code: "+44", label: "🇬🇧 +44" },
+  { code: "+61", label: "🇦🇺 +61" },
+  { code: "+65", label: "🇸🇬 +65" },
+  { code: "+60", label: "🇲🇾 +60" },
+  { code: "+81", label: "🇯🇵 +81" },
+  { code: "+86", label: "🇨🇳 +86" },
+  { code: "+91", label: "🇮🇳 +91" },
+  { code: "+971", label: "🇦🇪 +971" },
+  { code: "+49", label: "🇩🇪 +49" },
+  { code: "+33", label: "🇫🇷 +33" },
+];
+
+type FieldErrors = { name?: boolean; phone?: boolean; email?: boolean };
+
 function TeaserPage() {
   const [active, setActive] = useState(0);
   const [ready, setReady] = useState(false);
+  const [name, setName] = useState("");
+  const [countryCode, setCountryCode] = useState("+66");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState<FieldErrors>({});
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
   const intervalRef = useRef<number | null>(null);
 
   // Decode-aware preloading; only start rotation once all images are decoded.
