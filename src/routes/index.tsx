@@ -159,7 +159,7 @@ function TeaserPage() {
           >
             <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
               Something{" "}
-              <span style={{ fontWeight: 600, fontStyle: "italic" }}>
+              <span style={{ fontWeight: 500, fontStyle: "italic" }}>
                 Playfully Luxurious
               </span>
             </span>
