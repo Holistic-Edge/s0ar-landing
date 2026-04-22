@@ -123,7 +123,7 @@ function TeaserPage() {
   }
 
   const inputBaseClass =
-    "h-14 w-full rounded-lg border bg-white/20 px-4 text-sm text-[var(--cream)] outline-none transition-colors placeholder:text-[color:rgba(249,247,239,0.8)] focus:bg-white/30";
+    "h-11 w-full rounded-lg border bg-white/20 px-4 text-sm text-[var(--cream)] outline-none transition-colors placeholder:text-[color:rgba(249,247,239,0.8)] focus:bg-white/30";
   const inputBaseStyle: React.CSSProperties = {
     fontFamily: "'Work Sans', sans-serif",
     fontWeight: 300,
@@ -184,7 +184,7 @@ function TeaserPage() {
         </div>
 
         {/* Headline + email — vertically centered in remaining space */}
-        <div className="flex flex-1 flex-col items-center justify-center gap-8 pb-24 text-center sm:gap-10">
+        <div className="flex flex-1 flex-col items-center justify-center gap-6 pb-24 text-center sm:gap-8">
           <h1
             className="rizz-fade-up text-[var(--cream)]"
             style={{
@@ -209,11 +209,11 @@ function TeaserPage() {
 
           {/* Email capture */}
           <div
-            className="rizz-fade-up w-full max-w-lg"
+            className="rizz-fade-up w-full max-w-md"
             style={{ animationDelay: "1s" }}
           >
             {submitted ? (
-              <div className="rounded-2xl border border-white/20 bg-[#B87261]/85 p-6 shadow-2xl shadow-black/20 backdrop-blur-md sm:p-8">
+              <div className="rounded-2xl border border-white/20 bg-[#B87261]/85 p-5 shadow-2xl shadow-black/20 backdrop-blur-md sm:p-6">
                 <p
                   className="text-[var(--cream)]"
                   style={{
@@ -226,8 +226,8 @@ function TeaserPage() {
                 </p>
               </div>
             ) : (
-              <div className="rounded-2xl border border-white/20 bg-[#B87261]/85 p-6 shadow-2xl shadow-black/20 backdrop-blur-md sm:p-8">
-                <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+              <div className="rounded-2xl border border-white/20 bg-[#B87261]/85 p-5 shadow-2xl shadow-black/20 backdrop-blur-md sm:p-6">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
                   <input
                     type="text"
                     required
@@ -247,7 +247,7 @@ function TeaserPage() {
                       value={countryCode}
                       onChange={(e) => setCountryCode(e.target.value)}
                       aria-label="Country code"
-                      className="h-14 w-28 shrink-0 rounded-lg border bg-white/20 px-2 text-sm text-[var(--cream)] outline-none transition-colors focus:bg-white/30"
+                      className="h-11 w-24 shrink-0 rounded-lg border bg-white/20 px-2 text-sm text-[var(--cream)] outline-none transition-colors focus:bg-white/30"
                       style={{ ...inputBaseStyle, borderColor: borderFor(false) }}
                     >
                       {COUNTRY_CODES.map((c) => (
@@ -293,7 +293,7 @@ function TeaserPage() {
                   />
                   <button
                     type="submit"
-                    className="h-14 w-full rounded-lg bg-[var(--cream)] px-8 text-xs uppercase text-[var(--rizz-bg)] transition-all duration-300 hover:bg-[var(--rizz-bg)] hover:text-[var(--cream)]"
+                    className="h-11 w-full rounded-lg bg-[var(--cream)] px-8 text-xs uppercase text-[var(--rizz-bg)] transition-all duration-300 hover:bg-[var(--rizz-bg)] hover:text-[var(--cream)]"
                     style={{
                       fontFamily: "'Work Sans', sans-serif",
                       fontWeight: 500,
@@ -304,11 +304,11 @@ function TeaserPage() {
                   </button>
                 </form>
                 <p
-                  className="mt-4 text-[color:rgba(249,247,239,0.9)]"
+                  className="mt-3 text-[color:rgba(249,247,239,0.9)]"
                   style={{
                     fontFamily: "'Work Sans', sans-serif",
                     fontWeight: 300,
-                    fontSize: "0.875rem",
+                    fontSize: "0.8125rem",
                     letterSpacing: "0.02em",
                   }}
                 >
