@@ -2,16 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
 import logo from "@/assets/RIZZ_Manta_Ray_logo-02.png";
-import header1 from "@/assets/Header_1.jpg";
-import header2 from "@/assets/Header_2.jpg";
 import header3 from "@/assets/Header_3.jpg";
 import header4 from "@/assets/Header_4.jpg";
 import header5 from "@/assets/Header_5.jpg";
-import header6 from "@/assets/Header_6.jpg";
-import header7 from "@/assets/Header_7.jpg";
 import header8 from "@/assets/Header_8.jpg";
 
-const HEADERS = [header1, header2, header3, header4, header5, header6, header7, header8];
+const HEADERS = [header3, header4, header5, header8];
 
 export const Route = createFileRoute("/")({
   head: () => ({
