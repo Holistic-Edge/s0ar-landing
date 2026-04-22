@@ -63,6 +63,11 @@
 
 :root {
   --radius: 0.625rem;
+  /* RIZZ Manta Ray brand tokens */
+  --cream: #f9f7ef;
+  --copper-rose: #b87463;
+  --rose-gold: #daa28f;
+  --rizz-bg: #1a1510;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
@@ -142,3 +147,38 @@
     color: var(--color-foreground);
   }
 }
+
+/* RIZZ teaser animations */
+@keyframes rizz-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rizz-ambient-pulse {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scaleY(0.85);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scaleY(1);
+  }
+}
+
+.rizz-fade-up {
+  opacity: 0;
+  animation: rizz-fade-up 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.rizz-ambient {
+  transform-origin: center;
+  animation: rizz-ambient-pulse 3s ease-in-out infinite;
+}
+
