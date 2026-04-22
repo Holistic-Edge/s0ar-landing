@@ -39,12 +39,32 @@ export const Route = createFileRoute("/")({
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const COUNTRY_CODES = [
+  { code: "+66", label: "🇹🇭 +66" },
+  { code: "+1", label: "🇺🇸 +1" },
+  { code: "+44", label: "🇬🇧 +44" },
+  { code: "+61", label: "🇦🇺 +61" },
+  { code: "+65", label: "🇸🇬 +65" },
+  { code: "+60", label: "🇲🇾 +60" },
+  { code: "+81", label: "🇯🇵 +81" },
+  { code: "+86", label: "🇨🇳 +86" },
+  { code: "+91", label: "🇮🇳 +91" },
+  { code: "+971", label: "🇦🇪 +971" },
+  { code: "+49", label: "🇩🇪 +49" },
+  { code: "+33", label: "🇫🇷 +33" },
+];
+
+type FieldErrors = { name?: boolean; phone?: boolean; email?: boolean };
+
 function TeaserPage() {
   const [active, setActive] = useState(0);
   const [ready, setReady] = useState(false);
+  const [name, setName] = useState("");
+  const [countryCode, setCountryCode] = useState("+66");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState<FieldErrors>({});
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
   const intervalRef = useRef<number | null>(null);
 
   // Decode-aware preloading; only start rotation once all images are decoded.
@@ -85,13 +105,32 @@ function TeaserPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!EMAIL_RE.test(email.trim())) {
-      setError(true);
-      return;
-    }
-    setError(false);
+    const trimmedName = name.trim();
+    const trimmedPhone = phone.trim();
+    const phoneDigits = trimmedPhone.replace(/[^\d]/g, "");
+    const phoneValid =
+      /^[\d\s-]+$/.test(trimmedPhone) &&
+      phoneDigits.length >= 6 &&
+      phoneDigits.length <= 20;
+    const next: FieldErrors = {
+      name: !(trimmedName.length > 0 && trimmedName.length <= 100),
+      phone: !phoneValid,
+      email: !EMAIL_RE.test(email.trim()),
+    };
+    setErrors(next);
+    if (next.name || next.phone || next.email) return;
     setSubmitted(true);
   }
+
+  const inputBaseClass =
+    "h-14 w-full rounded-lg border bg-white/20 px-4 text-sm text-[var(--cream)] outline-none transition-colors placeholder:text-[color:rgba(249,247,239,0.8)] focus:bg-white/30";
+  const inputBaseStyle: React.CSSProperties = {
+    fontFamily: "'Work Sans', sans-serif",
+    fontWeight: 300,
+    letterSpacing: "0.02em",
+  };
+  const borderFor = (hasError?: boolean) =>
+    hasError ? "var(--rizz-bg)" : "rgba(249,247,239,0.5)";
 
   return (
     <main
@@ -188,33 +227,73 @@ function TeaserPage() {
               </div>
             ) : (
               <div className="rounded-2xl border border-white/20 bg-[#B87261]/85 p-6 shadow-2xl shadow-black/20 backdrop-blur-md sm:p-8">
-                <form
-                  onSubmit={handleSubmit}
-                  className="flex flex-col gap-3 sm:flex-row"
-                >
+                <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                  <input
+                    type="text"
+                    required
+                    maxLength={100}
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                      if (errors.name) setErrors((p) => ({ ...p, name: false }));
+                    }}
+                    placeholder="Your name"
+                    aria-label="Name"
+                    className={inputBaseClass}
+                    style={{ ...inputBaseStyle, borderColor: borderFor(errors.name) }}
+                  />
+                  <div className="flex gap-2">
+                    <select
+                      value={countryCode}
+                      onChange={(e) => setCountryCode(e.target.value)}
+                      aria-label="Country code"
+                      className="h-14 w-28 shrink-0 rounded-lg border bg-white/20 px-2 text-sm text-[var(--cream)] outline-none transition-colors focus:bg-white/30"
+                      style={{ ...inputBaseStyle, borderColor: borderFor(false) }}
+                    >
+                      {COUNTRY_CODES.map((c) => (
+                        <option
+                          key={c.code}
+                          value={c.code}
+                          style={{ color: "var(--rizz-bg)" }}
+                        >
+                          {c.label}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="tel"
+                      inputMode="numeric"
+                      required
+                      maxLength={20}
+                      value={phone}
+                      onChange={(e) => {
+                        setPhone(e.target.value);
+                        if (errors.phone)
+                          setErrors((p) => ({ ...p, phone: false }));
+                      }}
+                      placeholder="Phone number"
+                      aria-label="Phone number"
+                      className={`${inputBaseClass} flex-1`}
+                      style={{ ...inputBaseStyle, borderColor: borderFor(errors.phone) }}
+                    />
+                  </div>
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
-                      if (error) setError(false);
+                      if (errors.email)
+                        setErrors((p) => ({ ...p, email: false }));
                     }}
-                    placeholder="Enter your email for early access"
+                    placeholder="Email address"
                     aria-label="Email address"
-                    className="h-14 flex-1 rounded-lg border bg-white/20 px-4 text-sm text-[var(--cream)] outline-none transition-colors placeholder:text-[color:rgba(249,247,239,0.8)] focus:bg-white/30"
-                    style={{
-                      fontFamily: "'Work Sans', sans-serif",
-                      fontWeight: 300,
-                      letterSpacing: "0.02em",
-                      borderColor: error
-                        ? "var(--rizz-bg)"
-                        : "rgba(249,247,239,0.5)",
-                    }}
+                    className={inputBaseClass}
+                    style={{ ...inputBaseStyle, borderColor: borderFor(errors.email) }}
                   />
                   <button
                     type="submit"
-                    className="h-14 rounded-lg bg-[var(--cream)] px-8 text-xs uppercase text-[var(--rizz-bg)] transition-all duration-300 hover:bg-[var(--rizz-bg)] hover:text-[var(--cream)]"
+                    className="h-14 w-full rounded-lg bg-[var(--cream)] px-8 text-xs uppercase text-[var(--rizz-bg)] transition-all duration-300 hover:bg-[var(--rizz-bg)] hover:text-[var(--cream)]"
                     style={{
                       fontFamily: "'Work Sans', sans-serif",
                       fontWeight: 500,
