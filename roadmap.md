@@ -6,4 +6,5 @@
 - [x] Refine hero hierarchy, centered registration and dropdowns, six-item policy grid, and centered footer; verify the review flow.
 - [x] Apply the nine approved visual refinements and verify desktop/mobile registration.
 - [x] Change the registration band to dark roast with a subtle bottom-right manta, retaining light inputs and the terracotta footer.
+- [x] Land the form card flush at the viewport top on "Request an invitation" without losing section padding; verify desktop/mobile.
 - [ ] Production integrations — awaiting internal design approval and service configuration; not part of this review build.
