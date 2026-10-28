@@ -219,6 +219,7 @@ button,input,select { font: inherit; }
 .registration-brand { width: 130px; height: 112px; margin-top: 50px; opacity: .5; }
 .review-disclaimer { font-size: 12px; color: var(--muted-foreground); margin-top: 25px; line-height: 1.6; }
 .registration-panel { width: 100%; max-width: 680px; padding: 36px; background: var(--background); border: 1px solid var(--border); border-radius: 4px; min-width: 0; color: var(--foreground); }
+#first-list { scroll-margin-top: 24px; }
 .progress-heading { display: flex; justify-content: space-between; gap: 12px; align-items: center; font-size: 12px; }
 .progress-heading .eyebrow { color: var(--primary-foreground); background: var(--primary); border-radius: 4px; padding: 5px 10px; }
 .manta-progress { position: relative; height: 2px; background: var(--border); margin: 22px 0 30px; }
@@ -311,7 +312,7 @@ button,input,select { font: inherit; }
  .section-heading h2 {font-size:40px;}.section-heading > p {display:none;}.moments-section {padding-top:30px;padding-bottom:60px;}
  .moments-grid { display: grid; grid-template-columns:1fr;gap:32px; }.moment-image {aspect-ratio:4/3;}.moment-caption h3 {font-size:32px;}
  .registration-section { grid-template-columns:1fr;gap:30px;padding-top:55px;padding-bottom:60px; }.registration-intro {padding:0;}.registration-intro h2 {font-size:52px;margin:16px 0 20px;}.registration-intro h2 br {display:none;}.registration-intro > p:not(.eyebrow) {max-width:100%;}.registration-brand {display:none;}.registration-intro .review-disclaimer {margin-top:16px;}
- .registration-panel {padding:24px 18px;}.form-grid {grid-template-columns:1fr;}.form-body h3 {font-size:30px;}.form-actions > span {max-width:95px;}.choice-chip {min-height:44px;}.thank-you h3 {font-size:38px;}
+ #first-list {scroll-margin-top:16px;}.channel-row {display:grid;grid-template-columns:1fr 1fr;}.channel-row .choice-chip {justify-content:flex-start;}.channel-row .choice-chip:last-child {grid-column:1 / -1;}.registration-panel {padding:24px 18px;}.form-grid {grid-template-columns:1fr;}.form-body h3 {font-size:30px;}.form-actions > span {max-width:95px;}.choice-chip {min-height:44px;}.thank-you h3 {font-size:38px;}
  .policy-section {padding-top:60px;padding-bottom:60px;}.policy-heading h2 {font-size:40px;}.policy-heading {text-align:left;margin-bottom:32px;}.policy-heading > p:last-child {font-size:15px;}.policy-grid {grid-template-columns:1fr;gap:25px;}.policy-grid article {display:grid;grid-template-columns:30px 1fr;gap:0 14px;}.policy-grid svg {grid-row:span 2;margin:0;}.policy-grid h3 {font-size:27px;}.nationality-note {gap:14px;}.nationality-note h3 {font-size:26px;}
  .footer-top,.footer-bottom {flex-direction:column;align-items:center;}.footer-top > img {width:200px;}.footer-top {gap:10px;}.footer-bottom > div {flex-wrap:wrap;justify-content:center;gap:10px 20px;}.footer-bottom > p {line-height:2;}
 }
