@@ -1,5 +1,5 @@
 export const OPENING_DATE = '2026-11-27T00:00:00+07:00';
-export const MINIMUM_AGE = 20;
+export const MINIMUM_AGE = 23;
 export const MAX_MUSIC_CHOICES = 2;
 export const DEFAULT_DIAL_CODE = '+66';
 export const CHANNELS = ['WhatsApp', 'LINE', 'WeChat', 'Instagram DM', 'Email'];

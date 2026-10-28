@@ -33,10 +33,10 @@ const MOMENTS = [
 ];
 const POLICIES = [
  {icon:Ticket,title:'Every guest is expected.',text:'Entry is by reservation and registration only, and every guest boards with a wristband.'},
- {icon:Waves,title:'A beautifully balanced crowd.',text:"Our hosts shape each session’s guest list so it reflects a lively mix of guests from Thailand, across Asia and around the world."},
+ {icon:Waves,title:'A beautifully balanced crowd.',text:"The Captain shapes each session’s guest list so it reflects a lively mix of guests from Thailand, across Asia and around the world."},
  {icon:Users,title:'Good company, good energy.',text:'Couples and mixed groups are always welcome. Larger groups are welcomed by advance reservation so we can host you properly.'},
- {icon:Sparkles,title:'Adults only.',text:'All guests must be 20 or over.'},
- {icon:ShieldCheck,title:"At our hosts’ discretion.",text:'Pre-registration gives you first access to invitations. Boarding is confirmed by our hosts and is never guaranteed.'},
+ {icon:Sparkles,title:'Adults only.',text:'All guests must be 23 or over.'},
+ {icon:ShieldCheck,title:"At the Captain’s discretion.",text:'Pre-registration gives you first access to invitations. Boarding is confirmed by the Captain and is never guaranteed.'},
  {icon:Globe,title:'Why we ask for your nationality',text:'Every journey to SOAR is by boat. As a licensed passenger operation, we keep a full manifest of everyone on board, so we ask for your name and nationality exactly as they appear on your passport or ID. It keeps you safe at sea and makes boarding seamless on the day.'},
 ];
 function SOARPage() {
