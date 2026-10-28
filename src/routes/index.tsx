@@ -13,12 +13,17 @@ import night from '@/assets/soar-dusk-led-bar.webp.asset.json';
 
 export const Route = createFileRoute('/')({
  head: () => ({meta:[
-  {title:'SOAR Ocean Club — Be First On Board'},
+  {title:'SOAR Ocean Club | Be First On Board'},
   {name:'description',content:'Something rare is rising on The Eastern Riviera. Discover SOAR Ocean Club and join the first list for opening invitations.'},
-  {property:'og:title',content:'SOAR Ocean Club — Be First On Board'},
+  {property:'og:title',content:'SOAR Ocean Club | Be First On Board'},
   {property:'og:description',content:'Sun by day. Paradise at sunset. A new rhythm after dark. Be among the first on board SOAR Ocean Club.'},
   {property:'og:type',content:'website'},
+  {property:'og:image',content:'https://rizzmantaraylanding.lovable.app/__l5e/assets-v1/ed409762-0ae5-41eb-abb2-4e75d380ad10/soar-share.jpg'},
+  {property:'og:image:width',content:'1200'},
+  {property:'og:image:height',content:'630'},
   {name:'twitter:card',content:'summary_large_image'},
+  {name:'twitter:title',content:'SOAR Ocean Club | Be First On Board'},
+  {name:'twitter:image',content:'https://rizzmantaraylanding.lovable.app/__l5e/assets-v1/ed409762-0ae5-41eb-abb2-4e75d380ad10/soar-share.jpg'},
  ]}), component: SOARPage,
 });
 const MOMENTS = [
