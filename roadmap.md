@@ -7,4 +7,5 @@
 - [x] Apply the nine approved visual refinements and verify desktop/mobile registration.
 - [x] Change the registration band to dark roast with a subtle bottom-right manta, retaining light inputs and the terracotta footer.
 - [x] Land the form card flush at the viewport top on "Request an invitation" without losing section padding; verify desktop/mobile.
+- [x] Keep the sunset stage secret: Horadiso caption to "Our signature hour. A surprise comes with sunset." and swap the Night photo to the supplied twilight deck shot; verify desktop/mobile.
 - [ ] Production integrations — awaiting internal design approval and service configuration; not part of this review build.
