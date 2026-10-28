@@ -5,4 +5,5 @@
 - [x] Apply required package security update.
 - [x] Refine hero hierarchy, centered registration and dropdowns, six-item policy grid, and centered footer; verify the review flow.
 - [x] Apply the nine approved visual refinements and verify desktop/mobile registration.
+- [x] Change the registration band to dark roast with a subtle bottom-right manta, retaining light inputs and the terracotta footer.
 - [ ] Production integrations — awaiting internal design approval and service configuration; not part of this review build.
