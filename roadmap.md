@@ -10,3 +10,4 @@
 - [x] Keep the sunset stage secret: Horadiso caption to "Our signature hour. A surprise comes with sunset." and swap the Night photo to the supplied twilight deck shot; verify desktop/mobile.
 - [ ] Production integrations — awaiting internal design approval and service configuration; not part of this review build.
 - [x] Add the approved four-photo lifestyle teaser within Find Your Moment, optimize photos, and verify lightbox on desktop/mobile.
+- [x] Widen the lifestyle gallery to match the rhythms, remove expand icons, and verify borderless lightbox with floating glass controls.
