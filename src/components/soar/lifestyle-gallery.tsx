@@ -21,6 +21,7 @@ const PHOTOS = [
 export function LifestyleGallery() {
   const [active, setActive] = useState<number | null>(null);
   const touchStart = useRef<number | null>(null);
+  const opener = useRef<HTMLButtonElement | null>(null);
   const photo = active === null ? undefined : PHOTOS[active];
   function move(direction: number) {
     setActive(current => current === null ? null : (current + direction + PHOTOS.length) % PHOTOS.length);
@@ -29,13 +30,13 @@ export function LifestyleGallery() {
   return <div className="lifestyle-gallery">
     <p className="eyebrow">A glimpse of life on board.</p>
     <div className="lifestyle-thumbnails">
-      {PHOTOS.map((item, index) => <Button key={item.image} type="button" variant="ghost" className="lifestyle-thumbnail" aria-label={`View lifestyle photo ${index + 1}: ${item.alt}`} onClick={() => setActive(index)}>
+      {PHOTOS.map((item, index) => <Button key={item.image} type="button" variant="ghost" className="lifestyle-thumbnail" aria-label={`View lifestyle photo ${index + 1}: ${item.alt}`} onClick={event => {opener.current = event.currentTarget; setActive(index);}}>
         <img src={item.thumbnail} alt={item.alt} loading="lazy" width={480} height={320}/>
         <span className="thumbnail-expand" aria-hidden="true"><Maximize2/></span>
       </Button>)}
     </div>
     <Dialog open={active !== null} onOpenChange={open => { if (!open) setActive(null); }}>
-      <DialogContent className="lifestyle-lightbox" onKeyDown={event => {
+      <DialogContent className="lifestyle-lightbox" onCloseAutoFocus={event => {event.preventDefault(); opener.current?.focus({preventScroll: true});}} onKeyDown={event => {
         if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
           event.preventDefault();
           move(event.key === 'ArrowRight' ? 1 : -1);
