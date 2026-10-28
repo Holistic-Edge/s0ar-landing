@@ -88,6 +88,7 @@
   --hero-scrim: linear-gradient(to bottom, oklch(0 0 0 / 0.55), oklch(0 0 0 / 0.52) 27%, oklch(0 0 0 / 0.04) 43%, oklch(0 0 0 / 0.08) 66%, oklch(0 0 0 / 0.75) 100%);
   --hero-border: oklch(1 0 0 / 0.3);
   --footer-background: var(--primary);
+  --registration-background: oklch(0.213946 0.064688 31.4819);
   --hero-background: oklch(0.213946 0.064688 31.4819);
   --scrollbar-track: var(--secondary);
   --scrollbar-thumb: var(--primary);
@@ -208,7 +209,8 @@ button,input,select { font: inherit; }
 .moment-caption { padding: 20px 0 0; }
 .moment-caption h3 { font-size: 36px; margin-bottom: 10px; }
 .moment-caption p { color: var(--muted-foreground); font-size: 15px; max-width: 340px; }
-.registration-section { display: flex; flex-direction: column; align-items: center; gap: 40px; padding-top: 90px; padding-bottom: 90px; background: var(--primary); color: var(--primary-foreground); }
+.registration-section { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 40px; padding-top: 90px; padding-bottom: 90px; background: var(--registration-background); color: var(--primary-foreground); }
+.registration-section::before { content: ''; position: absolute; right: -80px; bottom: -90px; width: min(640px, 75%); aspect-ratio: 1; background: url('./assets/sand-manta-ray.svg') center / contain no-repeat; opacity: .09; pointer-events: none; z-index: -1; }
 .registration-intro .eyebrow,.registration-intro .review-disclaimer { color: inherit; }
 .registration-intro .review-disclaimer { opacity: .8; }
 .registration-intro { text-align: center; max-width: 650px; }
