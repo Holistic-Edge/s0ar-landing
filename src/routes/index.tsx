@@ -1,328 +1,57 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { createFileRoute } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
+import { ArrowDown, ArrowUpRight, Instagram, Waves, Users, Ticket, Sparkles, ShieldCheck } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import { RegistrationForm } from '@/components/soar/registration-form';
+import { countdown } from '@/lib/preregistration';
+import logo from '@/assets/s0ar-logo-white.svg';
+import horizontalLogo from '@/assets/s0ar-horizontal-sand.svg';
+import terraLogo from '@/assets/s0ar-logo-terracotta.svg';
+import hero from '@/assets/soar-sunset.webp.asset.json';
+import day from '@/assets/soar-pool-deck-day.webp.asset.json';
+import sunset from '@/assets/soar-party-stage-sunset.webp.asset.json';
+import night from '@/assets/soar-dusk-led-bar.webp.asset.json';
 
-import logo from "@/assets/RIZZ_Manta_Ray_logo-02.png";
-import header3 from "@/assets/Header_3.jpg";
-import header4 from "@/assets/Header_4.jpg";
-import header5 from "@/assets/Header_5.jpg";
-import header8 from "@/assets/Header_8.jpg";
-
-const HEADERS = [header3, header4, header5, header8];
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "RIZZ Manta Ray — Coming Soon" },
-      {
-        name: "description",
-        content:
-          "Something playfully luxurious is coming to Pattaya. Sign up for early access.",
-      },
-      { property: "og:title", content: "RIZZ Manta Ray — Coming Soon" },
-      {
-        property: "og:description",
-        content:
-          "Something playfully luxurious is coming to Pattaya. Sign up for early access.",
-      },
-      { property: "og:image", content: header5 },
-      { name: "twitter:image", content: header5 },
-      { name: "twitter:title", content: "RIZZ Manta Ray — Coming Soon" },
-      {
-        name: "twitter:description",
-        content:
-          "Something playfully luxurious is coming to Pattaya. Sign up for early access.",
-      },
-    ],
-  }),
-  component: TeaserPage,
+export const Route = createFileRoute('/')({
+ head: () => ({meta:[
+  {title:'SOAR Ocean Club — Be First On Board'},
+  {name:'description',content:'Something rare is rising on The Eastern Riviera. Discover SOAR Ocean Club and join the first list for opening invitations.'},
+  {property:'og:title',content:'SOAR Ocean Club — Be First On Board'},
+  {property:'og:description',content:'Sun by day. Paradise at sunset. A new rhythm after dark. Be among the first on board SOAR Ocean Club.'},
+  {property:'og:type',content:'website'},
+  {name:'twitter:card',content:'summary_large_image'},
+ ]}), component: SOARPage,
 });
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const COUNTRY_CODES = [
-  { code: "+66", label: "🇹🇭 +66" },
-  { code: "+1", label: "🇺🇸 +1" },
-  { code: "+44", label: "🇬🇧 +44" },
-  { code: "+61", label: "🇦🇺 +61" },
-  { code: "+65", label: "🇸🇬 +65" },
-  { code: "+60", label: "🇲🇾 +60" },
-  { code: "+81", label: "🇯🇵 +81" },
-  { code: "+86", label: "🇨🇳 +86" },
-  { code: "+91", label: "🇮🇳 +91" },
-  { code: "+971", label: "🇦🇪 +971" },
-  { code: "+49", label: "🇩🇪 +49" },
-  { code: "+33", label: "🇫🇷 +33" },
+const MOMENTS = [
+ {name:'Day',number:'01',time:'11:00 — 16:00',description:'Sun, sea and slow house by the pool.',image:day.url,alt:'SOAR pool deck with sun loungers and the open sea'},
+ {name:'Horadiso',number:'02',time:'17:00 — 20:30',description:'The paradise hour. A musician rises from the water as the sky turns.',image:sunset.url,alt:'SOAR stage and ocean deck at sunset'},
+ {name:'Night',number:'03',time:'21:00 — MIDNIGHT',description:'Headline DJs, a full deck and the bay lit up around you.',image:night.url,alt:'SOAR illuminated bar and deck after dark'},
 ];
-
-type FieldErrors = { name?: boolean; phone?: boolean; email?: boolean };
-
-function TeaserPage() {
-  const [active, setActive] = useState(0);
-  const [ready, setReady] = useState(false);
-  const [name, setName] = useState("");
-  const [countryCode, setCountryCode] = useState("+66");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState<FieldErrors>({});
-  const [submitted, setSubmitted] = useState(false);
-  const intervalRef = useRef<number | null>(null);
-
-  // Decode-aware preloading; only start rotation once all images are decoded.
-  useEffect(() => {
-    let cancelled = false;
-    Promise.all(
-      HEADERS.map(
-        (src) =>
-          new Promise<void>((resolve) => {
-            const img = new Image();
-            img.src = src;
-            const done = () => resolve();
-            if (img.decode) {
-              img.decode().then(done).catch(done);
-            } else {
-              img.onload = done;
-              img.onerror = done;
-            }
-          }),
-      ),
-    ).then(() => {
-      if (!cancelled) setReady(true);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!ready) return;
-    intervalRef.current = window.setInterval(() => {
-      setActive((i) => (i + 1) % HEADERS.length);
-    }, 5000);
-    return () => {
-      if (intervalRef.current) window.clearInterval(intervalRef.current);
-    };
-  }, [ready]);
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const trimmedName = name.trim();
-    const trimmedPhone = phone.trim();
-    const phoneDigits = trimmedPhone.replace(/[^\d]/g, "");
-    const phoneValid =
-      /^[\d\s-]+$/.test(trimmedPhone) &&
-      phoneDigits.length >= 6 &&
-      phoneDigits.length <= 20;
-    const next: FieldErrors = {
-      name: !(trimmedName.length > 0 && trimmedName.length <= 100),
-      phone: !phoneValid,
-      email: !EMAIL_RE.test(email.trim()),
-    };
-    setErrors(next);
-    if (next.name || next.phone || next.email) return;
-    setSubmitted(true);
-  }
-
-  const inputBaseClass =
-    "h-11 w-full rounded-lg border bg-white/20 px-4 text-sm text-[var(--cream)] outline-none transition-colors placeholder:text-[color:rgba(249,247,239,0.8)] focus:bg-white/30";
-  const inputBaseStyle: React.CSSProperties = {
-    fontFamily: "'Work Sans', sans-serif",
-    fontWeight: 300,
-    letterSpacing: "0.02em",
-  };
-  const borderFor = (hasError?: boolean) =>
-    hasError ? "var(--rizz-bg)" : "rgba(249,247,239,0.5)";
-
-  return (
-    <main
-      className="relative h-screen w-screen overflow-hidden"
-      style={{ backgroundColor: "var(--rizz-bg)" }}
-    >
-      {/* Image stack — all rendered persistently, cross-fade via opacity */}
-      <div className="absolute inset-0">
-        {HEADERS.map((src, i) => (
-          <div
-            key={src}
-            aria-hidden="true"
-            className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1400ms] ease-in-out"
-            style={{
-              backgroundImage: `url(${src})`,
-              opacity: i === active ? 1 : 0,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Cinematic warm overlay */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(20,12,6,0.4) 50%, rgba(0,0,0,0.7) 100%)",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute inset-0 mix-blend-soft-light"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(218,162,143,0.15) 0%, transparent 70%)",
-        }}
-      />
-
-      {/* Content layer */}
-      <div className="relative z-10 flex h-full flex-col items-center px-6 sm:px-10">
-        {/* Logo */}
-        <div
-          className="rizz-fade-up flex w-full justify-center pt-[8vh]"
-          style={{ animationDelay: "0.2s" }}
-        >
-          <img
-            src={logo}
-            alt="RIZZ Manta Ray"
-            className="h-auto w-[140px] sm:w-[160px] md:w-[180px]"
-            draggable={false}
-          />
-        </div>
-
-        {/* Headline + email — vertically centered in remaining space */}
-        <div className="flex flex-1 flex-col items-center justify-center gap-6 pb-24 text-center sm:gap-8">
-          <h1
-            className="rizz-fade-up text-4xl text-[var(--cream)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 300,
-              lineHeight: 0.9,
-              letterSpacing: "-0.01em",
-              animationDelay: "0.4s",
-              textShadow: "0 2px 30px rgba(0,0,0,0.4)",
-            }}
-          >
-            Something{" "}
-            <em style={{ fontWeight: 500, fontStyle: "italic" }}>
-              Playfully Luxurious
-            </em>{" "}
-            is coming.
-          </h1>
-
-          {/* Email capture */}
-          <div
-            className="rizz-fade-up w-full max-w-md"
-            style={{ animationDelay: "1s" }}
-          >
-            {submitted ? (
-              <div className="rounded-2xl border border-white/20 bg-[#B87261]/85 p-5 shadow-2xl shadow-black/20 backdrop-blur-md sm:p-6">
-                <p
-                  className="text-[var(--cream)]"
-                  style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "1.5rem",
-                    fontWeight: 300,
-                  }}
-                >
-                  You&apos;re on the list.
-                </p>
-              </div>
-            ) : (
-              <div className="rounded-2xl border border-white/20 bg-[#B87261]/85 p-5 shadow-2xl shadow-black/20 backdrop-blur-md sm:p-6">
-                <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
-                  <input
-                    type="text"
-                    required
-                    maxLength={100}
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                      if (errors.name) setErrors((p) => ({ ...p, name: false }));
-                    }}
-                    placeholder="Your name"
-                    aria-label="Name"
-                    className={inputBaseClass}
-                    style={{ ...inputBaseStyle, borderColor: borderFor(errors.name) }}
-                  />
-                  <div className="flex gap-2">
-                    <select
-                      value={countryCode}
-                      onChange={(e) => setCountryCode(e.target.value)}
-                      aria-label="Country code"
-                      className="h-11 w-24 shrink-0 rounded-lg border bg-white/20 px-2 text-sm text-[var(--cream)] outline-none transition-colors focus:bg-white/30"
-                      style={{ ...inputBaseStyle, borderColor: borderFor(false) }}
-                    >
-                      {COUNTRY_CODES.map((c) => (
-                        <option
-                          key={c.code}
-                          value={c.code}
-                          style={{ color: "var(--rizz-bg)" }}
-                        >
-                          {c.label}
-                        </option>
-                      ))}
-                    </select>
-                    <input
-                      type="tel"
-                      inputMode="numeric"
-                      required
-                      maxLength={20}
-                      value={phone}
-                      onChange={(e) => {
-                        setPhone(e.target.value);
-                        if (errors.phone)
-                          setErrors((p) => ({ ...p, phone: false }));
-                      }}
-                      placeholder="Phone number"
-                      aria-label="Phone number"
-                      className={`${inputBaseClass} flex-1`}
-                      style={{ ...inputBaseStyle, borderColor: borderFor(errors.phone) }}
-                    />
-                  </div>
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      if (errors.email)
-                        setErrors((p) => ({ ...p, email: false }));
-                    }}
-                    placeholder="Email address"
-                    aria-label="Email address"
-                    className={inputBaseClass}
-                    style={{ ...inputBaseStyle, borderColor: borderFor(errors.email) }}
-                  />
-                  <button
-                    type="submit"
-                    className="h-11 w-full rounded-lg bg-[var(--cream)] px-8 text-xs uppercase text-[var(--rizz-bg)] transition-all duration-300 hover:bg-[var(--rizz-bg)] hover:text-[var(--cream)]"
-                    style={{
-                      fontFamily: "'Work Sans', sans-serif",
-                      fontWeight: 500,
-                      letterSpacing: "0.2em",
-                    }}
-                  >
-                    Notify Me
-                  </button>
-                </form>
-                <p
-                  className="mt-3 text-[color:rgba(249,247,239,0.9)]"
-                  style={{
-                    fontFamily: "'Work Sans', sans-serif",
-                    fontWeight: 300,
-                    fontSize: "0.8125rem",
-                    letterSpacing: "0.02em",
-                  }}
-                >
-                  Be the first to know when we open.
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Ambient bottom motion */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
-          <div
-            className="rizz-ambient h-12 w-px"
-            style={{ backgroundColor: "rgba(249,247,239,0.4)" }}
-          />
-        </div>
-      </div>
-    </main>
-  );
+const POLICIES = [
+ {icon:Ticket,title:'Every guest is expected.',text:'Entry is by reservation and registration only, and every guest boards with a wristband.'},
+ {icon:Waves,title:'A beautifully balanced crowd.',text:"Our hosts shape each session’s guest list so it reflects a lively mix of guests from Thailand, across Asia and around the world."},
+ {icon:Users,title:'Good company, good energy.',text:'Couples and mixed groups are always welcome. Larger groups are welcomed by advance reservation so we can host you properly.'},
+ {icon:Sparkles,title:'Adults only.',text:'All guests must be 20 or over.'},
+ {icon:ShieldCheck,title:"At our hosts’ discretion.",text:'Pre-registration gives you first access to invitations. Boarding is confirmed by our hosts and is never guaranteed.'},
+];
+function SOARPage() {
+ const [clock,setClock] = useState<ReturnType<typeof countdown> | null>(null);
+ const [privacy,setPrivacy] = useState(false);
+ useEffect(() => {setClock(countdown(Date.now()));const timer=window.setInterval(() => setClock(countdown(Date.now())),1000);return () => window.clearInterval(timer);},[]);
+ return <main>
+  <section className="soar-hero" aria-labelledby="hero-title">
+   <img className="hero-photo" src={hero.url} alt="SOAR Ocean Club floating on the open water at sunset" fetchPriority="high"/>
+   <div className="hero-scrim"/>
+   <header className="hero-header"><span className="eyebrow">THE EASTERN RIVIERA</span><img src={logo} alt="SOAR Ocean Club"/><span className="eyebrow">NA JOMTIEN · THAILAND</span></header>
+   <div className="hero-copy"><p className="eyebrow">BE FIRST ON BOARD</p><h1 id="hero-title">Something rare is rising<br className="desktop-break"/> on <em>The Eastern Riviera.</em></h1><p className="hero-subline">SOAR Ocean Club opens this November.<br/>Be among the first on board.</p><Button asChild className="soar-button hero-button"><a href="#first-list">Join the First List<ArrowUpRight/></a></Button></div>
+   <div className="hero-bottom"><div className="opening-label"><span className="eyebrow">THE COUNTDOWN BEGINS</span><span>Opening night · 27 November 2026</span></div><div className="countdown" aria-label="Countdown to opening night">{(['days','hours','minutes','seconds'] as const).map(key => <div key={key}><strong>{clock ? String(clock[key]).padStart(2,'0') : '—'}</strong><span>{key}</span></div>)}</div><a className="discover-link" href="#idea" aria-label="Discover SOAR"><ArrowDown/></a></div>
+  </section>
+  <section id="idea" className="idea-section section-shell"><p className="eyebrow">A WORLD OF ITS OWN</p><h2>A little further from ordinary.<br/><em>A little closer to the sea.</em></h2><p>A floating ocean club shaped like a manta ray, out on the open water off Na Jomtien. Sun by day, the paradise hour at sunset, the deck alive after dark.</p><p>Pre-register for first access to opening sessions, private invitations and the first word on our headline nights.</p><span className="editorial-line"/></section>
+  <section className="moments-section section-shell" aria-labelledby="moments-title"><div className="section-heading"><div><p className="eyebrow">ONE OCEAN. THREE RHYTHMS.</p><h2 id="moments-title">Find your moment.</h2></div><p>However you arrive,<br/>there is a rhythm for you.</p></div><div className="moments-grid">{MOMENTS.map(m => <article className="moment" key={m.name}><div className="moment-image"><img src={m.image} alt={m.alt} loading="lazy"/><span className="moment-number">{m.number}</span><p className="eyebrow">{m.time}</p></div><div className="moment-caption"><h3>{m.name}</h3><p>{m.description}</p></div></article>)}</div></section>
+  <section id="first-list" className="registration-section section-shell"><div className="registration-intro"><p className="eyebrow">YOUR FIRST SOAR STARTS HERE</p><h2>Be first<br/><em>on board.</em></h2><p>Some things are worth being early for.</p><p>Tell us a little about yourself. We’ll take care of the invitation.</p><img src={terraLogo} alt="" className="registration-brand"/><p className="review-disclaimer">Internal design preview. Registration and messages are not connected yet.</p></div><RegistrationForm openPrivacy={() => setPrivacy(true)}/></section>
+  <section id="policy" className="policy-section section-shell"><div className="policy-heading"><p className="eyebrow">GOOD COMPANY. GOOD ENERGY.</p><h2>Our Onboard Policy</h2><p>SOAR is a world of its own, out on the open water, and the energy on deck is something we curate with care. To keep every session balanced, vibrant and Playfully Luxurious for all our guests, we keep a considered guest policy from day one.</p></div><div className="policy-grid">{POLICIES.map(p => <article key={p.title}><p.icon strokeWidth={1}/><h3>{p.title}</h3><p>{p.text}</p></article>)}</div><div className="nationality-note"><Waves strokeWidth={1}/><div><h3>Why we ask for your nationality</h3><p>Every journey to SOAR is by boat. As a licensed passenger operation, we keep a full manifest of everyone on board, so we ask for your name and nationality exactly as they appear on your passport or ID. It keeps you safe at sea and makes boarding seamless on the day.</p></div></div></section>
+  <footer className="soar-footer section-shell"><div className="footer-top"><img src={horizontalLogo} alt="SOAR Ocean Club"/><div><p className="eyebrow">THE SEA IS WAITING.</p><Button asChild variant="link"><a href="https://www.instagram.com/soaroceanclub/" target="_blank" rel="noreferrer"><Instagram/>Follow SOAR on Instagram<ArrowUpRight/></a></Button></div></div><div className="footer-bottom"><p>#TheEasternRiviera &nbsp; #SOAROceanClub &nbsp; #SimplySOAR</p><div><span>© 2026 Afloat Company Limited</span><Button variant="link" onClick={() => setPrivacy(true)}>Privacy Notice</Button></div></div></footer>
+  <Dialog open={privacy} onOpenChange={setPrivacy}><DialogContent className="privacy-dialog"><p className="eyebrow">AFLOAT COMPANY LIMITED</p><DialogTitle className="privacy-title">Privacy Notice</DialogTitle><DialogDescription>Pre-registration at SOAR Ocean Club</DialogDescription><div className="privacy-copy"><p className="review-disclaimer">Draft for internal review — to be approved before registrations open.</p><h3>Your details, treated with care.</h3><p>Afloat Company Limited uses your name, nationality, contact details and preferences to manage pre-registration, opening invitations and boat boarding. Nationality is required for our passenger manifest.</p><h3>Your choices.</h3><p>Invitations, events and offers are optional. You may withdraw marketing consent without affecting your pre-registration. Access to registration details will be restricted to authorised SOAR team members and service providers supporting these purposes.</p><h3>Your rights.</h3><p>Under Thailand’s PDPA, you may request access, correction or deletion of your personal information and withdraw consent, subject to applicable legal obligations.</p><p>The privacy contact, retention period and service-provider details must be confirmed by Afloat Company Limited before this notice goes live. This internal preview does not store or transmit registration details.</p></div></DialogContent></Dialog>
+ </main>;
 }
