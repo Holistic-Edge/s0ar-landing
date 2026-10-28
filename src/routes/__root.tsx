@@ -29,22 +29,7 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "RIZZ Manta Ray — Coming Soon" },
-      {
-        name: "description",
-        content:
-          "Something playfully luxurious is coming to Pattaya. Sign up for early access.",
-      },
-      { name: "author", content: "RIZZ Manta Ray" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "RIZZ Manta Ray — Coming Soon" },
-      { name: "twitter:title", content: "RIZZ Manta Ray — Coming Soon" },
-      { name: "description", content: "A teaser landing page for Rizz Manta Ray Ocean Club, offering a glimpse of luxury." },
-      { property: "og:description", content: "A teaser landing page for Rizz Manta Ray Ocean Club, offering a glimpse of luxury." },
-      { name: "twitter:description", content: "A teaser landing page for Rizz Manta Ray Ocean Club, offering a glimpse of luxury." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c5db1246-db25-4cbc-aafa-640673a9fca2/id-preview-cc755bf1--cf90bf79-f94e-4909-ac4b-e13d9af628e3.lovable.app-1776828531579.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c5db1246-db25-4cbc-aafa-640673a9fca2/id-preview-cc755bf1--cf90bf79-f94e-4909-ac4b-e13d9af628e3.lovable.app-1776828531579.png" },
+      { name: "author", content: "SOAR Ocean Club" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -52,7 +37,7 @@ export const Route = createRootRoute({
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,500&family=Work+Sans:wght@200;300;400;500&family=IBM+Plex+Mono:wght@300;400&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,500;1,600&family=Work+Sans:wght@300;400;500;600&display=swap",
       },
     ],
   }),
