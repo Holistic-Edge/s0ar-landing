@@ -9,3 +9,4 @@
 - [x] Land the form card flush at the viewport top on "Request an invitation" without losing section padding; verify desktop/mobile.
 - [x] Keep the sunset stage secret: Horadiso caption to "Our signature hour. A surprise comes with sunset." and swap the Night photo to the supplied twilight deck shot; verify desktop/mobile.
 - [ ] Production integrations — awaiting internal design approval and service configuration; not part of this review build.
+- [ ] Add the approved four-photo lifestyle teaser within Find Your Moment, optimize photos, and verify lightbox on desktop/mobile.
