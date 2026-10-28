@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/compone
 import { RegistrationForm } from '@/components/soar/registration-form';
 import logo from '@/assets/s0ar-logo-white.svg';
 import horizontalLogo from '@/assets/s0ar-horizontal-sand.svg';
-import hero from '@/assets/soar-sunset.webp.asset.json';
+import hero from '@/assets/soar-hero-sunset-v2.webp.asset.json';
 import day from '@/assets/soar-pool-deck-day.webp.asset.json';
 import sunset from '@/assets/soar-party-stage-sunset.webp.asset.json';
 import night from '@/assets/soar-twilight-night.webp.asset.json';
@@ -18,12 +18,12 @@ export const Route = createFileRoute('/')({
   {property:'og:title',content:'SOAR Ocean Club | Be First On Board'},
   {property:'og:description',content:'Sun by day. Paradise at sunset. A new rhythm after dark. Be among the first on board SOAR Ocean Club.'},
   {property:'og:type',content:'website'},
-  {property:'og:image',content:'https://rizzmantaraylanding.lovable.app/__l5e/assets-v1/ed409762-0ae5-41eb-abb2-4e75d380ad10/soar-share.jpg'},
+  {property:'og:image',content:'https://s0ar-landing.lovable.app/__l5e/assets-v1/5099ba6d-e3a5-4427-92a0-689a5066a1f1/soar-share-v2.jpg'},
   {property:'og:image:width',content:'1200'},
   {property:'og:image:height',content:'630'},
   {name:'twitter:card',content:'summary_large_image'},
   {name:'twitter:title',content:'SOAR Ocean Club | Be First On Board'},
-  {name:'twitter:image',content:'https://rizzmantaraylanding.lovable.app/__l5e/assets-v1/ed409762-0ae5-41eb-abb2-4e75d380ad10/soar-share.jpg'},
+  {name:'twitter:image',content:'https://s0ar-landing.lovable.app/__l5e/assets-v1/5099ba6d-e3a5-4427-92a0-689a5066a1f1/soar-share-v2.jpg'},
  ]}), component: SOARPage,
 });
 const MOMENTS = [
