@@ -240,8 +240,7 @@ button,input,select { font: inherit; }
 .dial-trigger { border-radius: 4px; }
 .country-trigger:focus-visible,.dial-trigger:focus { outline: 1px solid var(--primary); outline-offset: 2px; }
 .country-trigger[aria-invalid=true] { border-color: var(--destructive); }
-.phone-row .country-menu { min-width: 106px; }
-.country-menu [cmdk-list] { max-height: min(260px, var(--radix-popover-content-available-height)); }
+.country-menu [cmdk-list] { max-height: min(260px, max(120px, calc(var(--radix-popover-content-available-height) - 60px))); }
 .country-menu { width: var(--radix-popover-trigger-width); max-width: calc(100vw - 48px); padding: 0; }
 .country-menu [cmdk-item][data-selected=true],.registration-select-menu [data-highlighted] { background: var(--primary); color: var(--primary-foreground); }
 .instagram-field { position: relative; }
