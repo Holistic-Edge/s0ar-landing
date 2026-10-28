@@ -9,7 +9,7 @@ import horizontalLogo from '@/assets/s0ar-horizontal-sand.svg';
 import hero from '@/assets/soar-sunset.webp.asset.json';
 import day from '@/assets/soar-pool-deck-day.webp.asset.json';
 import sunset from '@/assets/soar-party-stage-sunset.webp.asset.json';
-import night from '@/assets/soar-dusk-led-bar.webp.asset.json';
+import night from '@/assets/soar-twilight-night.webp.asset.json';
 
 export const Route = createFileRoute('/')({
  head: () => ({meta:[
@@ -28,8 +28,8 @@ export const Route = createFileRoute('/')({
 });
 const MOMENTS = [
  {name:'Day',number:'01',time:'11:00 — 16:00',description:'Sun, sea and slow house by the pool.',image:day.url,alt:'SOAR pool deck with sun loungers and the open sea'},
- {name:'Horadiso',number:'02',time:'17:00 — 20:30',description:'The paradise hour. A musician rises from the water as the sky turns.',image:sunset.url,alt:'SOAR stage and ocean deck at sunset'},
- {name:'Night',number:'03',time:'21:00 — MIDNIGHT',description:'Headline DJs, a full deck and the bay lit up around you.',image:night.url,alt:'SOAR illuminated bar and deck after dark'},
+ {name:'Horadiso',number:'02',time:'17:00 — 20:30',description:'Our signature hour. A surprise comes with sunset.',image:sunset.url,alt:'SOAR stage and ocean deck at sunset'},
+ {name:'Night',number:'03',time:'21:00 — MIDNIGHT',description:'Headline DJs, a full deck and the bay lit up around you.',image:night.url,alt:'SOAR guests on the twilight deck with the pool glowing'},
 ];
 const POLICIES = [
  {icon:Ticket,title:'Every guest is expected.',text:'Entry is by reservation and registration only, and every guest boards with a wristband.'},
