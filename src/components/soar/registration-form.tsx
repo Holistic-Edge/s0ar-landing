@@ -25,8 +25,9 @@ export function RegistrationForm({ openPrivacy }: {openPrivacy: () => void}) {
  const [consent, setConsent] = useState({adult:false,policy:false,privacy:false,marketing:false});
  const [submitted, setSubmitted] = useState(false);
  const [consentError, setConsentError] = useState(false);
+ const [occasionDate, setOccasionDate] = useState('');
  function field(key: keyof Contact, label: string, optional = false, type = 'text') {
-  return <label className="form-field"><span>{label}{optional && <small>Optional</small>}</span><input type={type} value={contact[key]} autoComplete={key === 'firstName' ? 'given-name' : key === 'lastName' ? 'family-name' : key === 'email' ? 'email' : 'off'} required={!optional} maxLength={100} aria-invalid={Boolean(errors[key])} list={key === 'nationality' || key === 'residence' ? 'countries' : undefined} onChange={e => {setContact({...contact,[key]:e.target.value});setErrors({...errors,[key]:undefined});}} />{errors[key] && <small className="field-error">{errors[key]}</small>}</label>;
+  return <label className="form-field"><span>{label}{optional && <small>Optional</small>}</span><input aria-label={label} type={type} value={contact[key]} autoComplete={key === 'firstName' ? 'given-name' : key === 'lastName' ? 'family-name' : key === 'email' ? 'email' : 'off'} required={!optional} maxLength={100} aria-invalid={Boolean(errors[key])} list={key === 'nationality' || key === 'residence' ? 'countries' : undefined} onChange={e => {setContact({...contact,[key]:e.target.value});setErrors({...errors,[key]:undefined});}} />{errors[key] && <small className="field-error">{errors[key]}</small>}</label>;
  }
  function next() {
   if(step === 1) {
