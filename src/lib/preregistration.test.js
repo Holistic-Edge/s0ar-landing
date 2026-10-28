@@ -1,6 +1,6 @@
 import { test, expect } from 'bun:test';
 import { MINIMUM_AGE, DEFAULT_DIAL_CODE, toggleMusic, canRegister, countdown, OPENING_DATE } from './preregistration';
-test('All guests must be 20 or over', () => expect(MINIMUM_AGE).toBe(20));
+test('All guests must be 23 or over', () => expect(MINIMUM_AGE).toBe(23));
 test('Thailand +66 is the initial mobile country code', () => expect(DEFAULT_DIAL_CODE).toBe('+66'));
 test('Music choices are limited to two and can be deselected', () => {
  expect(toggleMusic(['House', 'Disco'], 'Techno')).toEqual(['House', 'Disco']);
