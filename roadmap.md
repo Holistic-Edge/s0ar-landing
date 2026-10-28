@@ -4,5 +4,5 @@
 - [x] Verify rules, complete form flow and mobile layout.
 - [x] Apply required package security update.
 - [x] Refine hero hierarchy, centered registration and dropdowns, six-item policy grid, and centered footer; verify the review flow.
-- [ ] Apply the nine approved visual refinements and verify desktop/mobile registration.
+- [x] Apply the nine approved visual refinements and verify desktop/mobile registration.
 - [ ] Production integrations — awaiting internal design approval and service configuration; not part of this review build.
