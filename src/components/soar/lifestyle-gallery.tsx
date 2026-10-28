@@ -6,16 +6,19 @@ import photo23 from '@/assets/soar-lifestyle-23.webp.asset.json';
 import photo24 from '@/assets/soar-lifestyle-24.webp.asset.json';
 import photo25 from '@/assets/soar-lifestyle-25.webp.asset.json';
 import photo26 from '@/assets/soar-lifestyle-26.webp.asset.json';
+import photo27 from '@/assets/soar-lifestyle-27.webp.asset.json';
 import thumb23 from '@/assets/soar-lifestyle-23-thumb.webp.asset.json';
 import thumb24 from '@/assets/soar-lifestyle-24-thumb.webp.asset.json';
 import thumb25 from '@/assets/soar-lifestyle-25-thumb.webp.asset.json';
 import thumb26 from '@/assets/soar-lifestyle-26-thumb.webp.asset.json';
+import thumb27 from '@/assets/soar-lifestyle-27-thumb.webp.asset.json';
 
 const PHOTOS = [
   { image: photo23.url, thumbnail: thumb23.url, alt: 'Guests watching the ocean sunset from the sheltered SOAR deck' },
   { image: photo24.url, thumbnail: thumb24.url, alt: 'Friends sharing drinks beside the sea at sunset' },
   { image: photo25.url, thumbnail: thumb25.url, alt: 'Friends raising a toast together on board after dark' },
   { image: photo26.url, thumbnail: thumb26.url, alt: 'SOAR Ocean Club illuminated at night, seen from above' },
+  { image: photo27.url, thumbnail: thumb27.url, alt: 'DJ seen from behind the decks, facing the SOAR dance floor' },
 ];
 
 export function LifestyleGallery() {
