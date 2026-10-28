@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, Maximize2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import photo23 from '@/assets/soar-lifestyle-23.webp.asset.json';
@@ -32,7 +32,6 @@ export function LifestyleGallery() {
     <div className="lifestyle-thumbnails">
       {PHOTOS.map((item, index) => <Button key={item.image} type="button" variant="ghost" className="lifestyle-thumbnail" aria-label={`View lifestyle photo ${index + 1}: ${item.alt}`} onClick={event => {opener.current = event.currentTarget; setActive(index);}}>
         <img src={item.thumbnail} alt={item.alt} loading="lazy" width={480} height={320}/>
-        <span className="thumbnail-expand" aria-hidden="true"><Maximize2/></span>
       </Button>)}
     </div>
     <Dialog open={active !== null} onOpenChange={open => { if (!open) setActive(null); }}>
