@@ -1,3 +1,5 @@
+> **Update 2026-10-29:** Registrations are now captured inside this project (Lovable Cloud `preregistrations` table) and reviewed in the SOAR admin hub at `/admin`. The payload contract below is unchanged; SoCashless can consume it via CSV export or a future sync, but no external endpoint is required for the page to work.
+
 # SOAR pre-registration — SoCashless handoff
 
 ## Status
