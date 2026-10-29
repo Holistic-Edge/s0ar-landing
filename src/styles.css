@@ -460,7 +460,8 @@ button,input,select { font: inherit; }
 .admin-modal .admin-detail { grid-template-columns: 1fr 1fr; column-gap: 40px; }
 .admin-modal .admin-detail div { grid-template-columns: 170px 1fr; }
 .admin-modal .admin-detail dt { white-space: nowrap; }
-.admin-status { display: flex; align-items: center; gap: 14px; margin: 4px 0; }
+.admin-detail-status dd { padding-top: 2px; }
+.admin-detail-status .admin-segment button { height: 30px; padding: 0 12px; }
 .admin-segment { display: inline-flex; border: 1px solid var(--border); background: var(--card); }
 .admin-segment button { height: 34px; padding: 0 16px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-foreground); }
 .admin-segment button + button { border-left: 1px solid var(--border); }
