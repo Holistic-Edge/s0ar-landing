@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useCallback, useEffect, useState } from 'react';
-import { Download, Search, Inbox } from 'lucide-react';
+import { Download, Search, Inbox, Trash2 } from 'lucide-react';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import type { Database } from '@/integrations/supabase/types';
@@ -71,6 +72,12 @@ function PreregistrationsPage() {
   setRows(rs => rs.map(r => r.id === row.id ? next : r)); setOpen(next); toast.success('Saved'); void loadStats();
  }
 
+ async function remove(row: Row) {
+  const { error } = await supabase.from('preregistrations').delete().eq('id', row.id);
+  if (error) { toast.error('Could not delete'); return; }
+  setOpen(null); toast.success('Registration deleted'); void load(); void loadStats();
+ }
+
  async function exportCsv() {
   setExporting(true);
   const all: Row[] = [];
@@ -115,12 +122,12 @@ function PreregistrationsPage() {
   <div className="admin-pager"><span className="admin-label text-muted-foreground">{total.toLocaleString()} guests · page {page + 1} of {pages}</span>
    <div className="flex gap-2"><Button variant="outline" disabled={page === 0} onClick={() => setPage(p => p - 1)}>Previous</Button><Button variant="outline" disabled={page + 1 >= pages} onClick={() => setPage(p => p + 1)}>Next</Button></div></div>
   <Sheet open={Boolean(open)} onOpenChange={o => { if (!o) setOpen(null); }}>
-   <SheetContent className="admin-scope admin-drawer overflow-y-auto">{open && <GuestDetail key={open.id} row={open} onUpdate={patch => update(open, patch)}/>}</SheetContent>
+   <SheetContent className="admin-scope admin-drawer overflow-y-auto">{open && <GuestDetail key={open.id} row={open} onUpdate={patch => update(open, patch)} onDelete={() => remove(open)}/>}</SheetContent>
   </Sheet>
  </div>;
 }
 
-function GuestDetail({ row, onUpdate }: { row: Row; onUpdate: (patch: Partial<Pick<Row, 'status' | 'notes'>>) => void }) {
+function GuestDetail({ row, onUpdate, onDelete }: { row: Row; onUpdate: (patch: Partial<Pick<Row, 'status' | 'notes'>>) => void; onDelete: () => void }) {
  const [notes, setNotes] = useState(row.notes);
  const items: [string, string][] = [
   ['Email', row.email], ['Mobile', `${row.dial_code} ${row.phone}`], ['Best channel', row.channel], ['Instagram', row.instagram ? `@${row.instagram}` : '—'],
@@ -135,5 +142,12 @@ function GuestDetail({ row, onUpdate }: { row: Row; onUpdate: (patch: Partial<Pi
   <dl className="admin-detail">{items.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
   <label className="admin-notes"><span className="admin-label text-muted-foreground">Private notes</span><textarea rows={4} maxLength={2000} value={notes} onChange={e => setNotes(e.target.value)}/></label>
   <Button className="soar-button mt-3" disabled={notes === row.notes} onClick={() => onUpdate({ notes })}>Save notes</Button>
- </>;
+  <AlertDialog>
+   <AlertDialogTrigger asChild><Button variant="outline" className="mt-8 w-full text-destructive"><Trash2/>Delete registration</Button></AlertDialogTrigger>
+   <AlertDialogContent className="admin-scope">
+    <AlertDialogHeader><AlertDialogTitle>Delete {row.first_name} {row.last_name}?</AlertDialogTitle><AlertDialogDescription>This permanently removes the registration. Use it for test entries; it can't be undone.</AlertDialogDescription></AlertDialogHeader>
+    <AlertDialogFooter><AlertDialogCancel>Cancel</AlertDialogCancel><AlertDialogAction onClick={onDelete} className="bg-destructive text-destructive-foreground">Delete</AlertDialogAction></AlertDialogFooter>
+   </AlertDialogContent>
+  </AlertDialog>
+  </>;
 }
