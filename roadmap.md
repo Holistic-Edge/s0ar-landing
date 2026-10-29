@@ -1,4 +1,6 @@
 # SOAR pre-registration
+- [ ] Add isolated screen review controls with synthetic sample states; keep public navigation unchanged.
+- [ ] Prepare validated submission contract, browser-only adapter seam, JSON schema and SoCashless handoff documentation; verify flow.
 - [x] Match website branding and transfer approved assets.
 - [x] Build six-section page, countdown and three-step review form.
 - [x] Verify rules, complete form flow and mobile layout.
