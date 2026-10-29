@@ -6,6 +6,7 @@ import { ChannelMark } from './channel-marks';
 import { CountryPicker } from './country-picker';
 import { CHANNELS, COUNTRIES, DIAL_CODES, QUESTIONS, DEFAULT_DIAL_CODE, canRegister, toggleMusic, validateContact, type Contact } from '@/lib/preregistration';
 import { buildRegistrationPayload, readRegistrationAttribution, submitRegistration, vibeSchema } from '@/lib/registration-submission';
+import { captureRegistration } from '@/lib/registration.functions';
 import { REVIEW_CONTACT, REVIEW_VIBE, REVIEW_CONSENT, type ReviewScreen } from '@/lib/registration-review';
 import manta from '@/assets/sand-manta-ray.svg';
 
@@ -55,9 +56,11 @@ export function RegistrationForm({ openPrivacy, reviewScreen, onReviewPayload }:
   try {
    submissionId.current ??= crypto.randomUUID();
    const payload = buildRegistrationPayload({contact, vibe:vibeInput(), consent:consent as {adult:true;policy:true;privacy:true;marketing:boolean}, submissionId:submissionId.current, submittedAt:new Date().toISOString(), attribution:readRegistrationAttribution()});
-   const result = await submitRegistration(payload);
-   if(result.status === 'preview') {onReviewPayload?.(payload);setSubmitted(true);}
-  } catch {setSubmissionError('We could not complete this preview. Please try again.');}
+    // Review screens stay network-free; the public page saves to the admin hub.
+    const result = await submitRegistration(payload, reviewScreen ? undefined : value => captureRegistration({data:value}));
+    if(result.status === 'preview') onReviewPayload?.(payload);
+    setSubmitted(true);
+   } catch {setSubmissionError('We could not save your details just now. Please try again.');}
   finally {busy.current=false;setSubmitting(false);}
  }
   if(submitted) {

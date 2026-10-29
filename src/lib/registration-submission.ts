@@ -42,6 +42,19 @@ export async function submitRegistration(payload:RegistrationPayload, transport?
  if (!transport) return { status:'preview' };
  return receiptSchema.parse(await transport(validated));
 }
+// Flattens the versioned contract into the admin hub's preregistrations row.
+export function toPreregistrationRow(p:RegistrationPayload) {
+ const c = p.contact; const v = p.vibe; const a = p.attribution;
+ return {
+  submission_id:p.submissionId, schema_version:p.schemaVersion, submitted_at:p.submittedAt,
+  first_name:c.firstName, last_name:c.lastName, nationality:c.nationality, residence:c.residence ?? '',
+  dial_code:c.dialCode, phone:c.phone, email:c.email, channel:c.channel, instagram:c.instagram ?? '',
+  moment:v.moment, music:v.music, move:v.move, party:v.group, occasion:v.occasion, occasion_date:v.occasionDate || null,
+  consent_adult:p.consent.adult, consent_policy:p.consent.policy, consent_privacy:p.consent.privacy, consent_marketing:p.consent.marketing,
+  policy_version:p.consent.policyVersion, privacy_version:p.consent.privacyVersion,
+  utm_source:a.utm_source, utm_medium:a.utm_medium, utm_campaign:a.utm_campaign, referrer:a.referrer, landing_path:a.landing_path,
+ };
+}
 export function readRegistrationAttribution():RegistrationPayload['attribution'] {
  if (typeof window === 'undefined') return {utm_source:'', utm_medium:'', utm_campaign:'', referrer:'', landing_path:'/'};
  const params = new URLSearchParams(window.location.search);

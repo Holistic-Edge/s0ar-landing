@@ -1,7 +1,8 @@
 # Project conventions
-- Keep `/review` separate from the public registration and synthetic-only; it is a screen-review tool, not an authenticated CMS or a source of production records.
-- Route final submissions through the shared versioned Zod contract and injectable transport seam; keep the default transport network-free until SoCashless integration approval, so preview completion cannot imply durable capture.
-- Keep the pre-registration review experience browser-only until production integrations are explicitly approved; review submissions must never claim to save or send data.
+- Keep `/review` separate from the public registration and synthetic-only; it never calls the capture transport.
+- Public submissions go through the shared Zod contract into the self-contained `preregistrations` table via a public server function using the publishable key; RLS allows anon insert only, so guests can never read rows.
+- The admin hub (`/auth`, `/_authenticated/admin`) mirrors the main SOAR website's sign-in and floating terracotta sidebar shell; reads/updates rely on `has_role(admin)` RLS, never client checks.
+- Public sign-up is disabled; every account created via Cloud Users → Add user is auto-granted admin by a trigger, so account creation is the access control.
 - Put shared registration validation and opening-time calculations in a browser-safe module with rule tests, so UI and future integrations use the same constraints.
 - Keep SOAR colors and page styling in the global design tokens; reuse the existing Button and Dialog controls.
 - Use a shared searchable CountryPicker built on the existing Popover and Command controls for registration country fields, so selection stays accessible and consistent.
