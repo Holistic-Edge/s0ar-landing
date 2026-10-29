@@ -287,7 +287,8 @@ button,input,select { font: inherit; }
 .thank-you { width: 100%; max-width: 680px; align-self: center; padding: 60px 25px; text-align: center; background: var(--background); border: 1px solid var(--border); border-radius: 4px; color: var(--foreground); }
 .thank-manta { display: block; width: 96px; height: 96px; margin: 0 auto 16px; -webkit-mask: url('./assets/sand-manta-ray.svg') center / contain no-repeat; mask: url('./assets/sand-manta-ray.svg') center / contain no-repeat; background-color: var(--primary); }
 .thank-note { font-size: 14px; color: var(--muted-foreground); margin-top: 14px; }
-.soar-date { position: relative; }
+.soar-date { position: relative; width: 100%; max-width: 320px; }
+.thank-you .eyebrow { color: var(--primary); }
 .soar-date-trigger > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .soar-date-placeholder { color: var(--muted-foreground); }
 .soar-date-clear { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 28px; height: 28px; color: var(--muted-foreground); border-radius: 100px; }
