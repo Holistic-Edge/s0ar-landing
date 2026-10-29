@@ -9,13 +9,13 @@ const REGION_CODES = 'AF AL DZ AS AD AO AI AQ AG AR AM AW AU AT AZ BS BH BD BB B
 const names = new Intl.DisplayNames(['en'], { type: 'region' });
 export const COUNTRIES = REGION_CODES.map(code => names.of(code) || code).sort();
 export const DIAL_CODES = ['+66', '+1', '+44', '+61', '+65', '+60', '+81', '+86', '+91', '+971', '+49', '+33', '+82', '+852', '+62', '+63', '+84', '+7', '+27', '+64', '+39', '+34'];
-export const QUESTIONS = [
+export const QUESTIONS: {key:string;title:string;hint?:string;options:string[]}[] = [
  {key:'moment', title:'When do you come alive?', options:['Daytime by the pool', 'Horadiso, the sunset hour', 'After dark']},
  {key:'music', title:'What is playing in your head right now?', hint:'Pick up to two', options:['Deep and soulful house', 'Melodic and progressive', 'Tech house and techno', 'Disco and nu disco', 'Surprise me']},
  {key:'move', title:'How do you like to move?', options:['Front of the dance floor', 'Drink in hand, gently swaying', 'Sunbed and sea views', 'A little of everything']},
  {key:'group', title:'Who would you SOAR with?', options:['My partner', 'A mixed group of friends', "A girls’ day out", "A boys’ day out", 'A celebration with my crew']},
  {key:'occasion', title:'Celebrating something?', hint:'Optional', options:['Birthday', 'Anniversary', 'Engagement', 'Business', 'Just because']},
-] as const;
+];
 const country = z.string().trim().refine(value => COUNTRIES.includes(value), 'Choose a country from the list.');
 export const contactSchema = z.object({
  firstName:z.string().trim().min(1, 'Please enter your first name.').max(100),
