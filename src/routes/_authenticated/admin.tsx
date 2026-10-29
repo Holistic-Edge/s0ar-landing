@@ -91,7 +91,6 @@ function PreregistrationsPage() {
    <div><p className="admin-label text-primary">/ First list</p><h1>Pre-registrations</h1></div>
    <Button onClick={exportCsv} disabled={exporting} className="soar-button"><Download/>{exporting ? 'Exporting…' : 'Export CSV'}</Button>
   </div>
-  <AccessRequests/>
   <div className="admin-stats">
    {([['Total', stats.all], ['New', stats.new], ['On the list', stats.confirmed], ['Not this time', stats.waitlist], ['Marketing opt-in', stats.marketing]] as const).map(([label, value]) =>
     <div key={label} className="adm-glass admin-stat"><span className="admin-label text-muted-foreground">{label}</span><strong>{value.toLocaleString()}</strong></div>)}
