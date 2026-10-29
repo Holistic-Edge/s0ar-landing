@@ -1,13 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useCallback, useEffect, useState } from 'react';
-import { Download, Search, Inbox, Trash2 } from 'lucide-react';
+import { Download, Search, Inbox, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import type { Database } from '@/integrations/supabase/types';
 import { AdminShell } from '@/components/admin/admin-shell';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { toCsv } from '@/lib/preregistration-csv';
 
 type Row = Database['public']['Tables']['preregistrations']['Row'];
@@ -121,13 +121,13 @@ function PreregistrationsPage() {
   </div>
   <div className="admin-pager"><span className="admin-label text-muted-foreground">{total.toLocaleString()} guests · page {page + 1} of {pages}</span>
    <div className="flex gap-2"><Button variant="outline" disabled={page === 0} onClick={() => setPage(p => p - 1)}>Previous</Button><Button variant="outline" disabled={page + 1 >= pages} onClick={() => setPage(p => p + 1)}>Next</Button></div></div>
-  <Sheet open={Boolean(open)} onOpenChange={o => { if (!o) setOpen(null); }}>
-   <SheetContent className="admin-scope admin-drawer overflow-y-auto">{open && <GuestDetail key={open.id} row={open} onUpdate={patch => update(open, patch)} onDelete={() => remove(open)}/>}</SheetContent>
-  </Sheet>
+  <Dialog open={Boolean(open)} onOpenChange={o => { if (!o) setOpen(null); }}>
+   <DialogContent className="admin-scope admin-modal">{open && (() => { const i = rows.findIndex(r => r.id === open.id); return <GuestDetail key={open.id} row={open} position={`${i + 1} of ${rows.length}`} onPrev={i > 0 ? () => setOpen(rows[i - 1]) : undefined} onNext={i >= 0 && i < rows.length - 1 ? () => setOpen(rows[i + 1]) : undefined} onUpdate={patch => update(open, patch)} onDelete={() => remove(open)}/>; })()}</DialogContent>
+  </Dialog>
  </div>;
 }
 
-function GuestDetail({ row, onUpdate, onDelete }: { row: Row; onUpdate: (patch: Partial<Pick<Row, 'status' | 'notes'>>) => void; onDelete: () => void }) {
+function GuestDetail({ row, position, onPrev, onNext, onUpdate, onDelete }: { row: Row; position: string; onPrev?: () => void; onNext?: () => void; onUpdate: (patch: Partial<Pick<Row, 'status' | 'notes'>>) => void; onDelete: () => void }) {
  const [notes, setNotes] = useState(row.notes);
  const items: [string, string][] = [
   ['Email', row.email], ['Mobile', `${row.dial_code} ${row.phone}`], ['Best channel', row.channel], ['Instagram', row.instagram ? `@${row.instagram}` : '—'],
@@ -136,18 +136,26 @@ function GuestDetail({ row, onUpdate, onDelete }: { row: Row; onUpdate: (patch: 
   ['Marketing opt-in', row.consent_marketing ? 'Yes' : 'No'], ['Received', new Date(row.created_at).toLocaleString()],
   ['Source', [row.utm_source, row.utm_medium, row.utm_campaign].filter(Boolean).join(' / ') || row.referrer || 'Direct'],
  ];
+ useEffect(() => {
+  const h = (e: KeyboardEvent) => { if ((e.target as HTMLElement)?.tagName === 'TEXTAREA') return; if (e.key === 'ArrowLeft') onPrev?.(); if (e.key === 'ArrowRight') onNext?.(); };
+  window.addEventListener('keydown', h); return () => window.removeEventListener('keydown', h);
+ }, [onPrev, onNext]);
  return <>
-  <SheetHeader><p className="admin-label text-primary">/ Guest</p><SheetTitle className="text-3xl">{row.first_name} {row.last_name}</SheetTitle><SheetDescription>Pre-registered guest details and answers.</SheetDescription></SheetHeader>
-  <div className="admin-tabs my-5">{(['new', 'confirmed', 'waitlist'] as const).map(s => <button key={s} type="button" aria-pressed={row.status === s} onClick={() => onUpdate({ status: s })}>{STATUS_LABEL[s]}</button>)}</div>
+  <DialogHeader><div className="flex items-center justify-between pr-8"><p className="admin-label text-primary">/ Guest</p>
+   <div className="flex items-center gap-2"><span className="admin-label text-muted-foreground">{position}</span><Button variant="outline" size="icon" aria-label="Previous guest" disabled={!onPrev} onClick={onPrev}><ChevronLeft/></Button><Button variant="outline" size="icon" aria-label="Next guest" disabled={!onNext} onClick={onNext}><ChevronRight/></Button></div></div>
+   <DialogTitle className="text-3xl">{row.first_name} {row.last_name}</DialogTitle><DialogDescription>Pre-registered guest details and answers.</DialogDescription></DialogHeader>
+  <div className="admin-tabs my-2">{(['new', 'confirmed', 'waitlist'] as const).map(s => <button key={s} type="button" aria-pressed={row.status === s} onClick={() => onUpdate({ status: s })}>{STATUS_LABEL[s]}</button>)}</div>
   <dl className="admin-detail">{items.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
   <label className="admin-notes"><span className="admin-label text-muted-foreground">Private notes</span><textarea rows={4} maxLength={2000} value={notes} onChange={e => setNotes(e.target.value)}/></label>
-  <Button className="soar-button mt-3" disabled={notes === row.notes} onClick={() => onUpdate({ notes })}>Save notes</Button>
+  <div className="flex items-center justify-between gap-3 mt-3">
+  <Button className="soar-button" disabled={notes === row.notes} onClick={() => onUpdate({ notes })}>Save notes</Button>
   <AlertDialog>
-   <AlertDialogTrigger asChild><Button variant="outline" className="mt-8 w-full text-destructive"><Trash2/>Delete registration</Button></AlertDialogTrigger>
+   <AlertDialogTrigger asChild><Button variant="outline" className="text-destructive"><Trash2/>Delete registration</Button></AlertDialogTrigger>
    <AlertDialogContent className="admin-scope">
     <AlertDialogHeader><AlertDialogTitle>Delete {row.first_name} {row.last_name}?</AlertDialogTitle><AlertDialogDescription>This permanently removes the registration. Use it for test entries; it can't be undone.</AlertDialogDescription></AlertDialogHeader>
     <AlertDialogFooter><AlertDialogCancel>Cancel</AlertDialogCancel><AlertDialogAction onClick={onDelete} className="bg-destructive text-destructive-foreground">Delete</AlertDialogAction></AlertDialogFooter>
    </AlertDialogContent>
   </AlertDialog>
+  </div>
   </>;
 }
