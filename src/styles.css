@@ -285,8 +285,7 @@ button,input,select { font: inherit; }
 .consent-row a { text-decoration: underline; text-underline-offset: 3px; }
 .consent-row button { display: inline; white-space: normal; padding: 0; height: auto; font-size: inherit; text-decoration: underline; }
 .thank-you { width: 100%; max-width: 680px; align-self: center; padding: 60px 25px; text-align: center; background: var(--background); border: 1px solid var(--border); border-radius: 4px; color: var(--foreground); }
-.thank-manta { width: 96px; height: 96px; object-fit: contain; margin: 0 auto 16px; filter: brightness(0) saturate(100%); opacity: .9; mask: none; }
-.thank-you .thank-manta { filter: none; background: none; -webkit-mask: url('./assets/sand-manta-ray.svg') center / contain no-repeat; mask: url('./assets/sand-manta-ray.svg') center / contain no-repeat; background-color: var(--primary); }
+.thank-manta { display: block; width: 96px; height: 96px; margin: 0 auto 16px; -webkit-mask: url('./assets/sand-manta-ray.svg') center / contain no-repeat; mask: url('./assets/sand-manta-ray.svg') center / contain no-repeat; background-color: var(--primary); }
 .thank-note { font-size: 14px; color: var(--muted-foreground); margin-top: 14px; }
 .soar-date { position: relative; }
 .soar-date-trigger > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
