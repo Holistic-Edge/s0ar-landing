@@ -2,7 +2,7 @@
 - Keep `/review` separate from the public registration and synthetic-only; it never calls the capture transport.
 - Public submissions go through the shared Zod contract into the self-contained `preregistrations` table via a public server function using the publishable key; RLS allows anon insert only, so guests can never read rows.
 - The admin hub (`/auth`, `/_authenticated/admin`) mirrors the main SOAR website's sign-in and floating terracotta sidebar shell; reads/updates rely on `has_role(admin)` RLS, never client checks.
-- Admin access is decided in the database: owner-created (pre-confirmed) accounts and email-verified accounts on the club's domain get admin via auth.users triggers; other self sign-ups land in admin_access_requests until an admin approves via decide_access_request, so access never depends on client checks.
+- Admin access is decided in the database: any account with a confirmed email gets admin via auth.users triggers (single tier), so access never depends on client checks.
 - Put shared registration validation and opening-time calculations in a browser-safe module with rule tests, so UI and future integrations use the same constraints.
 - Keep SOAR colors and page styling in the global design tokens; reuse the existing Button and Dialog controls.
 - Use a shared searchable CountryPicker built on the existing Popover and Command controls for registration country fields, so selection stays accessible and consistent.

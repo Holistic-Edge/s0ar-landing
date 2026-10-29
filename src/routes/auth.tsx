@@ -49,7 +49,7 @@ function AuthPage() {
    const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: `${window.location.origin}/admin` } });
    setBusy(false);
    if (error) { toast.error(error.message); return; }
-   setSent({ internal: email.trim().toLowerCase().endsWith('@soaroceanclub.com') });
+   setSent({ internal: true });
    return;
   }
   const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -65,11 +65,11 @@ function AuthPage() {
     <p className="auth-eyebrow">/ Admin Access</p>
     {sent ? <>
      <h1 className="auth-title">Check your inbox</h1>
-     <p className="auth-note">We sent a confirmation link to <strong>{email}</strong>. {sent.internal ? 'Confirm your email and you’ll have full access to the hub.' : 'After you confirm, an existing admin will review your request — you’ll have access once it’s approved.'}</p>
+     <p className="auth-note">We sent a confirmation link to <strong>{email}</strong>. Confirm your email and you’ll have full access to the hub.</p>
      <button type="button" className="auth-switch" onClick={() => { setSent(null); setMode('signin'); setPassword(''); }}>Back to sign in</button>
     </> : <>
      <h1 className="auth-title">{mode === 'signin' ? 'Welcome Back' : 'Request Access'}</h1>
-     {mode === 'signup' && <p className="auth-note">@soaroceanclub.com addresses get access once their email is confirmed. Other addresses need approval from an admin.</p>}
+     {mode === 'signup' && <p className="auth-note">Create your account, then confirm your email to access the hub.</p>}
      <form onSubmit={submit} className="auth-form">
       <Field label="Email"><input type="email" required value={email} onChange={e => setEmail(e.target.value)} autoComplete="email"/></Field>
       <Field label="Password"><span className="auth-password">
