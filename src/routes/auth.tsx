@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { toast } from 'sonner';
+import { Eye, EyeOff } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import logo from '@/assets/s0ar-logo-terracotta.svg';
 import hero from '@/assets/soar-hero-sunset-v3.webp.asset.json';
@@ -31,9 +32,12 @@ function AuthPage() {
  const navigate = useNavigate();
  const { next } = Route.useSearch();
  const target = next && next.startsWith('/') && !next.startsWith('//') ? next : '/admin';
+ const [mode, setMode] = useState<'signin' | 'signup'>('signin');
  const [email, setEmail] = useState('');
  const [password, setPassword] = useState('');
+ const [show, setShow] = useState(false);
  const [busy, setBusy] = useState(false);
+ const [sent, setSent] = useState<null | { internal: boolean }>(null);
  const [index, setIndex] = useState(0);
 
  useEffect(() => { supabase.auth.getUser().then(({ data }) => { if (data.user) navigate({ to: target, replace: true }); }); }, [navigate, target]);
@@ -41,6 +45,13 @@ function AuthPage() {
 
  async function submit(e: FormEvent) {
   e.preventDefault(); setBusy(true);
+  if (mode === 'signup') {
+   const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: `${window.location.origin}/admin` } });
+   setBusy(false);
+   if (error) { toast.error(error.message); return; }
+   setSent({ internal: email.trim().toLowerCase().endsWith('@soaroceanclub.com') });
+   return;
+  }
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   setBusy(false);
   if (error) { toast.error(error.message); return; }
@@ -52,12 +63,23 @@ function AuthPage() {
    <img src={logo} alt="S0AR" className="auth-logo"/>
    <div>
     <p className="auth-eyebrow">/ Admin Access</p>
-    <h1 className="auth-title">Welcome Back</h1>
-    <form onSubmit={submit} className="auth-form">
-     <Field label="Email"><input type="email" required value={email} onChange={e => setEmail(e.target.value)} autoComplete="email"/></Field>
-     <Field label="Password"><input type="password" required minLength={8} value={password} onChange={e => setPassword(e.target.value)} autoComplete="current-password"/></Field>
-     <button type="submit" disabled={busy} className="auth-submit">{busy ? 'Please wait…' : 'Sign In'}</button>
-    </form>
+    {sent ? <>
+     <h1 className="auth-title">Check your inbox</h1>
+     <p className="auth-note">We sent a confirmation link to <strong>{email}</strong>. {sent.internal ? 'Confirm your email and you’ll have full access to the hub.' : 'After you confirm, an existing admin will review your request — you’ll have access once it’s approved.'}</p>
+     <button type="button" className="auth-switch" onClick={() => { setSent(null); setMode('signin'); setPassword(''); }}>Back to sign in</button>
+    </> : <>
+     <h1 className="auth-title">{mode === 'signin' ? 'Welcome Back' : 'Request Access'}</h1>
+     {mode === 'signup' && <p className="auth-note">@soaroceanclub.com addresses get access once their email is confirmed. Other addresses need approval from an admin.</p>}
+     <form onSubmit={submit} className="auth-form">
+      <Field label="Email"><input type="email" required value={email} onChange={e => setEmail(e.target.value)} autoComplete="email"/></Field>
+      <Field label="Password"><span className="auth-password">
+       <input type={show ? 'text' : 'password'} required minLength={8} value={password} onChange={e => setPassword(e.target.value)} autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}/>
+       <button type="button" onClick={() => setShow(s => !s)} aria-label={show ? 'Hide password' : 'Show password'}>{show ? <EyeOff strokeWidth={1.5}/> : <Eye strokeWidth={1.5}/>}</button>
+      </span></Field>
+      <button type="submit" disabled={busy} className="auth-submit">{busy ? 'Please wait…' : mode === 'signin' ? 'Sign In' : 'Create Account'}</button>
+     </form>
+     <button type="button" className="auth-switch" onClick={() => setMode(m => m === 'signin' ? 'signup' : 'signin')}>{mode === 'signin' ? 'New here? Create an account' : 'Already have an account? Sign in'}</button>
+    </>}
    </div>
    <div/>
   </div>
