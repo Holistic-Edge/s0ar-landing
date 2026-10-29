@@ -44,8 +44,8 @@ export function AdminShell({ children }: { children: ReactNode }) {
 
  if (state.loading) return <div className="min-h-screen flex items-center justify-center"><p className="admin-label text-muted-foreground">Loading admin…</p></div>;
  if (!state.admin) return <div className="admin-scope min-h-screen flex items-center justify-center px-6"><div className="text-center max-w-sm space-y-3">
-  <p className="admin-label text-muted-foreground">Restricted</p><h1 className="text-3xl">Admin access required</h1>
-  <p className="text-sm text-muted-foreground">{state.email} doesn’t have admin permissions.</p>
+  <p className="admin-label text-primary">/ Awaiting approval</p><h1 className="text-3xl">Your request is in</h1>
+  <p className="text-sm text-muted-foreground">{state.email} is waiting for an admin to approve access. You’ll be able to sign in to the hub as soon as it’s approved.</p>
   <button onClick={signOut} className="admin-label hover:text-destructive">Sign out</button>
  </div></div>;
 
