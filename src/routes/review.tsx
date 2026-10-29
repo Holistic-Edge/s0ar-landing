@@ -15,7 +15,7 @@ export const Route = createFileRoute('/review')({
   {property:'og:type',content:'website'}, {name:'twitter:card',content:'summary'}, {name:'robots',content:'noindex, nofollow'},
  ]}), component:RegistrationReview,
 });
-const SCREENS:{key:ReviewScreen;label:string}[] = [{key:'1',label:'1 · Introduction'},{key:'2',label:'2 · Your vibe'},{key:'3',label:'3 · Fine print'},{key:'thank-you',label:'Thank you'}];
+const SCREENS:{key:ReviewScreen;label:string}[] = [{key:'1',label:'1 · Introduction'},{key:'2',label:'2 · Your vibe'},{key:'3',label:'3 · Fine print'},{key:'thank-you',label:'Thank you · On the list'},{key:'waitlist',label:'Thank you · Not this time'}];
 function RegistrationReview() {
  const [screen,setScreen] = useState<ReviewScreen>('1');
  const [revision,setRevision] = useState(0);

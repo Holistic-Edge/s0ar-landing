@@ -285,7 +285,26 @@ button,input,select { font: inherit; }
 .consent-row a { text-decoration: underline; text-underline-offset: 3px; }
 .consent-row button { display: inline; white-space: normal; padding: 0; height: auto; font-size: inherit; text-decoration: underline; }
 .thank-you { width: 100%; max-width: 680px; align-self: center; padding: 60px 25px; text-align: center; background: var(--background); border: 1px solid var(--border); border-radius: 4px; color: var(--foreground); }
-.thank-manta { width: 80px; height: 60px; object-fit: contain; background: var(--primary); padding: 15px; margin: 0 auto 24px; }
+.thank-manta { width: 96px; height: 96px; object-fit: contain; margin: 0 auto 16px; filter: brightness(0) saturate(100%); opacity: .9; mask: none; }
+.thank-you .thank-manta { filter: none; background: none; -webkit-mask: url('./assets/sand-manta-ray.svg') center / contain no-repeat; mask: url('./assets/sand-manta-ray.svg') center / contain no-repeat; background-color: var(--primary); }
+.thank-note { font-size: 14px; color: var(--muted-foreground); margin-top: 14px; }
+.soar-date { position: relative; }
+.soar-date-trigger > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.soar-date-placeholder { color: var(--muted-foreground); }
+.soar-date-clear { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 28px; height: 28px; color: var(--muted-foreground); border-radius: 100px; }
+.soar-date-clear:hover { color: var(--foreground); }
+.soar-date-clear svg { width: 14px; height: 14px; }
+.soar-calendar-popover { width: auto; padding: 0; background: var(--background); border: 1px solid var(--border); border-radius: 6px; box-shadow: 0 24px 60px -24px oklch(0.21 0.06 31 / .35); }
+.soar-calendar { padding: 20px; --cell-size: 2.6rem; background: transparent; }
+.soar-calendar .rdp-caption_label { font-family: var(--font-display); font-size: 24px; font-weight: 400; letter-spacing: -.01em; }
+.soar-calendar .rdp-weekday { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-foreground); padding-bottom: 6px; }
+.soar-calendar .rdp-button_previous,.soar-calendar .rdp-button_next { border-radius: 100px; color: var(--primary); }
+.soar-calendar .rdp-day button { border-radius: 100px; font-size: 14px; font-variant-numeric: tabular-nums; }
+.soar-calendar .rdp-day button:hover { background: var(--secondary); }
+.soar-calendar .rdp-today:not(.rdp-selected) button { background: transparent; box-shadow: inset 0 0 0 1px var(--primary); color: var(--primary); }
+.soar-calendar .rdp-today { background: transparent; }
+.soar-calendar .rdp-day button[data-selected-single=true] { background: var(--primary); color: var(--primary-foreground); }
+.soar-calendar .rdp-disabled button { opacity: .3; }
 .thank-you h3 { font-size: 46px; margin: 20px 0; overflow-wrap: anywhere; }
 .thank-you p { max-width: 400px; margin-inline: auto; }
 .thank-you > div { margin-top: 25px; }
