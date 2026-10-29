@@ -140,15 +140,15 @@ function GuestDetail({ row, position, onPrev, onNext, onUpdate, onDelete }: { ro
   const h = (e: KeyboardEvent) => { if ((e.target as HTMLElement)?.tagName === 'TEXTAREA') return; if (e.key === 'ArrowLeft') onPrev?.(); if (e.key === 'ArrowRight') onNext?.(); };
   window.addEventListener('keydown', h); return () => window.removeEventListener('keydown', h);
  }, [onPrev, onNext]);
+ const ig = row.instagram?.replace(/^@/, '');
  return <>
-  <DialogHeader><div className="flex items-center justify-between pr-8"><p className="admin-label text-primary">/ Guest</p>
-   <div className="flex items-center gap-2"><span className="admin-label text-muted-foreground">{position}</span><Button variant="outline" size="icon" aria-label="Previous guest" disabled={!onPrev} onClick={onPrev}><ChevronLeft/></Button><Button variant="outline" size="icon" aria-label="Next guest" disabled={!onNext} onClick={onNext}><ChevronRight/></Button></div></div>
+  <DialogHeader><div className="flex items-center justify-between pr-8"><p className="admin-label text-primary">/ Guest</p><span className="admin-label text-muted-foreground">{position}</span></div>
    <DialogTitle className="text-3xl">{row.first_name} {row.last_name}</DialogTitle><DialogDescription>Pre-registered guest details and answers.</DialogDescription></DialogHeader>
-  <div className="admin-tabs my-2">{(['new', 'confirmed', 'waitlist'] as const).map(s => <button key={s} type="button" aria-pressed={row.status === s} onClick={() => onUpdate({ status: s })}>{STATUS_LABEL[s]}</button>)}</div>
-  <dl className="admin-detail">{items.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+  <div className="admin-status"><span className="admin-label text-muted-foreground">Status</span><div className="admin-segment">{(['new', 'confirmed', 'waitlist'] as const).map(s => <button key={s} type="button" aria-pressed={row.status === s} onClick={() => onUpdate({ status: s })}>{STATUS_LABEL[s]}</button>)}</div></div>
+  <dl className="admin-detail">{items.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{k === 'Instagram' && ig ? <a href={`https://instagram.com/${encodeURIComponent(ig)}`} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">@{ig}</a> : v}</dd></div>)}</dl>
   <label className="admin-notes"><span className="admin-label text-muted-foreground">Private notes</span><textarea rows={4} maxLength={2000} value={notes} onChange={e => setNotes(e.target.value)}/></label>
-  <div className="flex items-center justify-between gap-3 mt-3">
-  <Button className="soar-button" disabled={notes === row.notes} onClick={() => onUpdate({ notes })}>Save notes</Button>
+  <div className="admin-modal-footer">
+  <div className="flex items-center gap-2">
   <AlertDialog>
    <AlertDialogTrigger asChild><Button variant="outline" className="text-destructive"><Trash2/>Delete registration</Button></AlertDialogTrigger>
    <AlertDialogContent className="admin-scope">
@@ -156,6 +156,9 @@ function GuestDetail({ row, position, onPrev, onNext, onUpdate, onDelete }: { ro
     <AlertDialogFooter><AlertDialogCancel>Cancel</AlertDialogCancel><AlertDialogAction onClick={onDelete} className="bg-destructive text-destructive-foreground">Delete</AlertDialogAction></AlertDialogFooter>
    </AlertDialogContent>
   </AlertDialog>
+  <Button variant="outline" size="icon" aria-label="Previous guest" disabled={!onPrev} onClick={onPrev}><ChevronLeft/></Button><Button variant="outline" size="icon" aria-label="Next guest" disabled={!onNext} onClick={onNext}><ChevronRight/></Button>
+  </div>
+  <Button className="soar-button" disabled={notes === row.notes} onClick={() => onUpdate({ notes })}>Save notes</Button>
   </div>
   </>;
 }
