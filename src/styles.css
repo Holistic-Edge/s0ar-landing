@@ -446,7 +446,7 @@ button,input,select { font: inherit; }
 .admin-pager { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; }
 .admin-drawer { width: min(520px, 100vw) !important; max-width: none !important; }
 .admin-detail { display: grid; gap: 0; border-top: 1px solid var(--border); }
-.admin-detail div { display: grid; grid-template-columns: 140px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.admin-detail > div { display: grid; grid-template-columns: 140px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
 .admin-detail dt { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted-foreground); padding-top: 3px; }
 .admin-notes { display: grid; gap: 8px; margin-top: 20px; }
 .admin-notes textarea { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; background: var(--background); font-size: 14px; outline: none; }
