@@ -16,17 +16,17 @@ export const QUESTIONS: {key:string;title:string;hint?:string;options:string[]}[
  {key:'group', title:'Who would you SOAR with?', options:['My partner', 'A mixed group of friends', "A girls’ day out", "A boys’ day out", 'A celebration with my crew']},
  {key:'occasion', title:'Celebrating something?', hint:'Optional', options:['Birthday', 'Anniversary', 'Engagement', 'Business', 'Just because']},
 ];
-const country = z.string().trim().refine(value => COUNTRIES.includes(value), 'Choose a country from the list.');
+const country = z.enum(COUNTRIES as [string, ...string[]], {errorMap:() => ({message:'Choose a country from the list.'})});
 export const contactSchema = z.object({
  firstName:z.string().trim().min(1, 'Please enter your first name.').max(100),
  lastName:z.string().trim().min(1, 'Please enter your last name.').max(100),
  nationality:country,
  residence:z.union([z.literal(''),country]),
- dialCode:z.string().refine(value => DIAL_CODES.includes(value), 'Choose a calling code from the list.'),
+ dialCode:z.enum(DIAL_CODES as [string, ...string[]]),
  phone:z.string().trim().regex(/^[\d\s()+-]{6,25}$/, 'Please enter a valid mobile number.').refine(value => value.replace(/\D/g, '').length >= 6, 'Please enter a valid mobile number.'),
  email:z.string().trim().email('Please enter a valid email address.').max(255),
- channel:z.string().refine(value => CHANNELS.includes(value), 'Choose how we should reach you.'),
- instagram:z.string().trim().transform(value => value.replace(/^@+/, '')).refine(value => !value || /^[A-Za-z0-9._]{1,30}$/.test(value), 'Enter a valid Instagram handle.'),
+ channel:z.enum(CHANNELS as [string, ...string[]], {errorMap:() => ({message:'Choose how we should reach you.'})}),
+ instagram:z.string().trim().regex(/^@?[A-Za-z0-9._]{0,30}$/, 'Enter a valid Instagram handle.').transform(value => value.replace(/^@/, '')),
 }).strict();
 export type Contact = { firstName: string; lastName: string; nationality: string; residence: string; dialCode: string; phone: string; email: string; channel: string; instagram: string };
 export function validateContact(c: Contact) {

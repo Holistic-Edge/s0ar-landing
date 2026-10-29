@@ -4,16 +4,17 @@ import { contactSchema, QUESTIONS } from './preregistration';
 export const NOTICE_VERSION = '2026-10-29-draft';
 function choice(key: string) {
  const options = QUESTIONS.find(question => question.key === key)?.options ?? [];
- return z.string().max(100).refine(value => options.some(option => option === value), 'Choose an option from the list.');
+ if (!options.length) throw new Error('Unknown preference definition');
+ return z.enum(options as [string, ...string[]]);
 }
-export const occasionDateSchema = z.string().refine(value => {
+export const occasionDateSchema = z.string().regex(/^(\d{4}-\d{2}-\d{2})?$/, 'Enter a valid occasion date.').refine(value => {
  if (!value) return true;
  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
  const date = new Date(`${value}T00:00:00Z`);
  return Number.isFinite(date.getTime()) && date.toISOString().slice(0,10) === value;
-}, 'Enter a valid occasion date.');
+}, 'Enter a valid occasion date.').describe('Empty or a real calendar date; server must reject impossible calendar dates.');
 export const vibeSchema = z.object({
- moment:choice('moment'), music:z.array(choice('music')).min(1).max(2).refine(values => new Set(values).size === values.length, 'Choose different music options.'),
+ moment:choice('moment'), music:z.array(choice('music')).min(1).max(2).refine(values => new Set(values).size === values.length, 'Choose different music options.').describe('Unique music selections; server must enforce uniqueness.'),
  move:choice('move'), group:choice('group'), occasion:z.union([z.literal(''), choice('occasion')]), occasionDate:occasionDateSchema,
 }).strict();
 export const consentSchema = z.object({ adult:z.literal(true), policy:z.literal(true), privacy:z.literal(true), marketing:z.boolean() }).strict();
