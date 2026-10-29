@@ -4,7 +4,7 @@
 Frontend review only. **No CMS, credentials, database, live webhook or message sending is connected.** Phillip's team owns production capture. No Cloud service has been enabled. `/review` is an unlinked, noindex design-review page, **not a protected admin area**. It contains synthetic defaults and no stored records. Anyone with the URL can open it; do not use real guest information there. Remove or protect it with real server-enforced authentication before production if access must be private.
 
 ## Review workflow
-Open `/review` and select Introduction, Your vibe, Fine print, or Thank you. Each selection resets to sample details. Submit Fine print to inspect/copy the validated JSON held only in memory. Refresh clears all state. The normal public page starts blank and retains its required step order. All completion screens explicitly say nothing was saved or sent. The current preview story card likewise makes no membership claim.
+Open `/review` and select Introduction, Your vibe, Fine print, or either Thank you outcome (On the list / Not this time). Each selection resets to sample details. Submit Fine print to inspect/copy the validated JSON held only in memory. Refresh clears all state. The normal public page starts blank and retains its required step order. Both completion screens carry a small "preview only" line until live capture exists. Which outcome a guest sees must be decided by the SoCashless response; the frontend currently always shows "On the list".
 
 ## Contract
 Source of truth: `src/lib/registration-submission.ts` (`registrationSchema`, `RegistrationPayload`, `buildRegistrationPayload`, `submitRegistration`). Portable schema: `docs/registration.schema.json`. Sample: `docs/registration.example.json`.
