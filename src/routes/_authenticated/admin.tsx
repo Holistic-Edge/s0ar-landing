@@ -1,13 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useCallback, useEffect, useState } from 'react';
-import { Download, Search, Inbox, Trash2 } from 'lucide-react';
+import { Download, Search, Inbox, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import type { Database } from '@/integrations/supabase/types';
 import { AdminShell } from '@/components/admin/admin-shell';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { toCsv } from '@/lib/preregistration-csv';
 
 type Row = Database['public']['Tables']['preregistrations']['Row'];
@@ -127,7 +127,7 @@ function PreregistrationsPage() {
  </div>;
 }
 
-function GuestDetail({ row, onUpdate, onDelete }: { row: Row; onUpdate: (patch: Partial<Pick<Row, 'status' | 'notes'>>) => void; onDelete: () => void }) {
+function GuestDetail({ row, position, onPrev, onNext, onUpdate, onDelete }: { row: Row; position: string; onPrev?: () => void; onNext?: () => void; onUpdate: (patch: Partial<Pick<Row, 'status' | 'notes'>>) => void; onDelete: () => void }) {
  const [notes, setNotes] = useState(row.notes);
  const items: [string, string][] = [
   ['Email', row.email], ['Mobile', `${row.dial_code} ${row.phone}`], ['Best channel', row.channel], ['Instagram', row.instagram ? `@${row.instagram}` : '—'],
