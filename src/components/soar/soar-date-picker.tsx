@@ -16,7 +16,7 @@ export function SoarDatePicker({ label, value, onChange }: { label: string; valu
      <CalendarDays aria-hidden="true"/>
     </Button>
    </PopoverTrigger>
-   <PopoverContent side="bottom" align="start" sideOffset={8} avoidCollisions={false} className="soar-calendar-popover">
+   <PopoverContent side="top" align="start" sideOffset={8} collisionPadding={16} className="soar-calendar-popover">
     <Calendar mode="single" selected={selected} defaultMonth={selected ?? startOfToday()} disabled={{ before: startOfToday() }} weekStartsOn={1}
      onSelect={date => { onChange(date ? format(date, 'yyyy-MM-dd') : ''); setOpen(false); }}
      className="soar-calendar pointer-events-auto"/>
