@@ -462,7 +462,7 @@ button,input,select { font: inherit; }
 .admin-modal .admin-detail dt { white-space: nowrap; }
 .admin-detail-status dd { padding-top: 2px; }
 .admin-detail-status .admin-segment { max-width: 100%; }
-.admin-detail-status .admin-segment button { height: 28px; padding: 0 8px; font-size: 9px; letter-spacing: .08em; white-space: nowrap; }
+.admin-detail-status .admin-segment button { height: 30px; padding: 0 10px; font-size: 10px; letter-spacing: .08em; white-space: nowrap; }
 .admin-segment { display: inline-flex; border: 1px solid var(--border); background: var(--card); }
 .admin-segment button { height: 34px; padding: 0 16px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-foreground); }
 .admin-segment button + button { border-left: 1px solid var(--border); }
