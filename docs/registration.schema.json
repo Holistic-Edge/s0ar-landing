@@ -1,0 +1,210 @@
+{
+  "$ref": "#/definitions/SOARRegistration",
+  "definitions": {
+    "SOARRegistration": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "const": "1.0"
+        },
+        "submissionId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "submittedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "contact": {
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "lastName": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "nationality": {
+              "type": "string"
+            },
+            "residence": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": ""
+                },
+                {
+                  "$ref": "#/definitions/SOARRegistration/properties/contact/properties/nationality"
+                }
+              ]
+            },
+            "dialCode": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string",
+              "pattern": "^[\\d\\s()+-]{6,25}$"
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "maxLength": 255
+            },
+            "channel": {
+              "type": "string"
+            },
+            "instagram": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "firstName",
+            "lastName",
+            "nationality",
+            "residence",
+            "dialCode",
+            "phone",
+            "email",
+            "channel",
+            "instagram"
+          ],
+          "additionalProperties": false
+        },
+        "vibe": {
+          "type": "object",
+          "properties": {
+            "moment": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "music": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "minItems": 1,
+              "maxItems": 2
+            },
+            "move": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "group": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "occasion": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": ""
+                },
+                {
+                  "type": "string",
+                  "maxLength": 100
+                }
+              ]
+            },
+            "occasionDate": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "moment",
+            "music",
+            "move",
+            "group",
+            "occasion",
+            "occasionDate"
+          ],
+          "additionalProperties": false
+        },
+        "consent": {
+          "type": "object",
+          "properties": {
+            "adult": {
+              "type": "boolean",
+              "const": true
+            },
+            "policy": {
+              "type": "boolean",
+              "const": true
+            },
+            "privacy": {
+              "type": "boolean",
+              "const": true
+            },
+            "marketing": {
+              "type": "boolean"
+            },
+            "policyVersion": {
+              "type": "string",
+              "const": "2026-10-29-draft"
+            },
+            "privacyVersion": {
+              "type": "string",
+              "const": "2026-10-29-draft"
+            }
+          },
+          "required": [
+            "adult",
+            "policy",
+            "privacy",
+            "marketing",
+            "policyVersion",
+            "privacyVersion"
+          ],
+          "additionalProperties": false
+        },
+        "attribution": {
+          "type": "object",
+          "properties": {
+            "utm_source": {
+              "type": "string",
+              "maxLength": 255
+            },
+            "utm_medium": {
+              "$ref": "#/definitions/SOARRegistration/properties/attribution/properties/utm_source"
+            },
+            "utm_campaign": {
+              "$ref": "#/definitions/SOARRegistration/properties/attribution/properties/utm_source"
+            },
+            "referrer": {
+              "type": "string",
+              "maxLength": 2048
+            },
+            "landing_path": {
+              "type": "string",
+              "maxLength": 2048
+            }
+          },
+          "required": [
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "referrer",
+            "landing_path"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "submissionId",
+        "submittedAt",
+        "contact",
+        "vibe",
+        "consent",
+        "attribution"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
