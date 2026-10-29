@@ -14,16 +14,150 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      preregistrations: {
+        Row: {
+          channel: string
+          consent_adult: boolean
+          consent_marketing: boolean
+          consent_policy: boolean
+          consent_privacy: boolean
+          created_at: string
+          dial_code: string
+          email: string
+          first_name: string
+          id: string
+          instagram: string
+          landing_path: string
+          last_name: string
+          moment: string
+          move: string
+          music: string[]
+          nationality: string
+          notes: string
+          occasion: string
+          occasion_date: string | null
+          party: string
+          phone: string
+          policy_version: string
+          privacy_version: string
+          referrer: string
+          residence: string
+          schema_version: string
+          status: string
+          submission_id: string
+          submitted_at: string
+          utm_campaign: string
+          utm_medium: string
+          utm_source: string
+        }
+        Insert: {
+          channel: string
+          consent_adult: boolean
+          consent_marketing: boolean
+          consent_policy: boolean
+          consent_privacy: boolean
+          created_at?: string
+          dial_code: string
+          email: string
+          first_name: string
+          id?: string
+          instagram?: string
+          landing_path?: string
+          last_name: string
+          moment: string
+          move: string
+          music: string[]
+          nationality: string
+          notes?: string
+          occasion?: string
+          occasion_date?: string | null
+          party: string
+          phone: string
+          policy_version: string
+          privacy_version: string
+          referrer?: string
+          residence?: string
+          schema_version: string
+          status?: string
+          submission_id: string
+          submitted_at: string
+          utm_campaign?: string
+          utm_medium?: string
+          utm_source?: string
+        }
+        Update: {
+          channel?: string
+          consent_adult?: boolean
+          consent_marketing?: boolean
+          consent_policy?: boolean
+          consent_privacy?: boolean
+          created_at?: string
+          dial_code?: string
+          email?: string
+          first_name?: string
+          id?: string
+          instagram?: string
+          landing_path?: string
+          last_name?: string
+          moment?: string
+          move?: string
+          music?: string[]
+          nationality?: string
+          notes?: string
+          occasion?: string
+          occasion_date?: string | null
+          party?: string
+          phone?: string
+          policy_version?: string
+          privacy_version?: string
+          referrer?: string
+          residence?: string
+          schema_version?: string
+          status?: string
+          submission_id?: string
+          submitted_at?: string
+          utm_campaign?: string
+          utm_medium?: string
+          utm_source?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +284,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+    },
   },
 } as const
