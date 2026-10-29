@@ -1,0 +1,487 @@
+{
+  "$ref": "#/definitions/SOARRegistration",
+  "definitions": {
+    "SOARRegistration": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "const": "1.0"
+        },
+        "submissionId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "submittedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "contact": {
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "lastName": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "nationality": {
+              "type": "string",
+              "enum": [
+                "Afghanistan",
+                "Albania",
+                "Algeria",
+                "American Samoa",
+                "Andorra",
+                "Angola",
+                "Anguilla",
+                "Antarctica",
+                "Antigua & Barbuda",
+                "Argentina",
+                "Armenia",
+                "Aruba",
+                "Australia",
+                "Austria",
+                "Azerbaijan",
+                "Bahamas",
+                "Bahrain",
+                "Bangladesh",
+                "Barbados",
+                "Belarus",
+                "Belgium",
+                "Belize",
+                "Benin",
+                "Bermuda",
+                "Bhutan",
+                "Bolivia",
+                "Bosnia & Herzegovina",
+                "Botswana",
+                "Brazil",
+                "British Virgin Islands",
+                "Brunei",
+                "Bulgaria",
+                "Burkina Faso",
+                "Burundi",
+                "Cambodia",
+                "Cameroon",
+                "Canada",
+                "Cape Verde",
+                "Cayman Islands",
+                "Central African Republic",
+                "Chad",
+                "Chile",
+                "China",
+                "Colombia",
+                "Comoros",
+                "Congo - Brazzaville",
+                "Congo - Kinshasa",
+                "Costa Rica",
+                "Croatia",
+                "Cuba",
+                "Cyprus",
+                "Czechia",
+                "Côte d’Ivoire",
+                "Denmark",
+                "Djibouti",
+                "Dominica",
+                "Dominican Republic",
+                "Ecuador",
+                "Egypt",
+                "El Salvador",
+                "Equatorial Guinea",
+                "Eritrea",
+                "Estonia",
+                "Eswatini",
+                "Ethiopia",
+                "Fiji",
+                "Finland",
+                "France",
+                "French Guiana",
+                "French Polynesia",
+                "Gabon",
+                "Gambia",
+                "Georgia",
+                "Germany",
+                "Ghana",
+                "Gibraltar",
+                "Greece",
+                "Greenland",
+                "Grenada",
+                "Guadeloupe",
+                "Guam",
+                "Guatemala",
+                "Guinea",
+                "Guinea-Bissau",
+                "Guyana",
+                "Haiti",
+                "Honduras",
+                "Hong Kong SAR China",
+                "Hungary",
+                "Iceland",
+                "India",
+                "Indonesia",
+                "Iran",
+                "Iraq",
+                "Ireland",
+                "Israel",
+                "Italy",
+                "Jamaica",
+                "Japan",
+                "Jordan",
+                "Kazakhstan",
+                "Kenya",
+                "Kiribati",
+                "Kuwait",
+                "Kyrgyzstan",
+                "Laos",
+                "Latvia",
+                "Lebanon",
+                "Lesotho",
+                "Liberia",
+                "Libya",
+                "Liechtenstein",
+                "Lithuania",
+                "Luxembourg",
+                "Macao SAR China",
+                "Madagascar",
+                "Malawi",
+                "Malaysia",
+                "Maldives",
+                "Mali",
+                "Malta",
+                "Marshall Islands",
+                "Martinique",
+                "Mauritania",
+                "Mauritius",
+                "Mexico",
+                "Micronesia",
+                "Moldova",
+                "Monaco",
+                "Mongolia",
+                "Montenegro",
+                "Montserrat",
+                "Morocco",
+                "Mozambique",
+                "Myanmar (Burma)",
+                "Namibia",
+                "Nepal",
+                "Netherlands",
+                "New Caledonia",
+                "New Zealand",
+                "Nicaragua",
+                "Niger",
+                "Nigeria",
+                "North Macedonia",
+                "Norway",
+                "Oman",
+                "Pakistan",
+                "Palau",
+                "Palestinian Territories",
+                "Panama",
+                "Papua New Guinea",
+                "Paraguay",
+                "Peru",
+                "Philippines",
+                "Poland",
+                "Portugal",
+                "Puerto Rico",
+                "Qatar",
+                "Romania",
+                "Russia",
+                "Rwanda",
+                "Réunion",
+                "Samoa",
+                "San Marino",
+                "Saudi Arabia",
+                "Senegal",
+                "Serbia",
+                "Seychelles",
+                "Sierra Leone",
+                "Singapore",
+                "Slovakia",
+                "Slovenia",
+                "Solomon Islands",
+                "Somalia",
+                "South Africa",
+                "South Korea",
+                "South Sudan",
+                "Spain",
+                "Sri Lanka",
+                "Sudan",
+                "Suriname",
+                "Sweden",
+                "Switzerland",
+                "Syria",
+                "São Tomé & Príncipe",
+                "Taiwan",
+                "Tajikistan",
+                "Tanzania",
+                "Thailand",
+                "Timor-Leste",
+                "Togo",
+                "Tonga",
+                "Trinidad & Tobago",
+                "Tunisia",
+                "Turkmenistan",
+                "Turks & Caicos Islands",
+                "Türkiye",
+                "U.S. Virgin Islands",
+                "Uganda",
+                "Ukraine",
+                "United Arab Emirates",
+                "United Kingdom",
+                "United States",
+                "Uruguay",
+                "Uzbekistan",
+                "Vanuatu",
+                "Vatican City",
+                "Venezuela",
+                "Vietnam",
+                "Yemen",
+                "Zambia",
+                "Zimbabwe"
+              ]
+            },
+            "residence": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": ""
+                },
+                {
+                  "$ref": "#/definitions/SOARRegistration/properties/contact/properties/nationality"
+                }
+              ]
+            },
+            "dialCode": {
+              "type": "string",
+              "enum": [
+                "+66",
+                "+1",
+                "+44",
+                "+61",
+                "+65",
+                "+60",
+                "+81",
+                "+86",
+                "+91",
+                "+971",
+                "+49",
+                "+33",
+                "+82",
+                "+852",
+                "+62",
+                "+63",
+                "+84",
+                "+7",
+                "+27",
+                "+64",
+                "+39",
+                "+34"
+              ]
+            },
+            "phone": {
+              "type": "string",
+              "pattern": "^[\\d\\s()+-]{6,25}$"
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "maxLength": 255
+            },
+            "channel": {
+              "type": "string",
+              "enum": [
+                "WhatsApp",
+                "LINE",
+                "WeChat",
+                "Instagram DM",
+                "Email"
+              ]
+            },
+            "instagram": {
+              "type": "string",
+              "pattern": "^@?[A-Za-z0-9._]{0,30}$"
+            }
+          },
+          "required": [
+            "firstName",
+            "lastName",
+            "nationality",
+            "residence",
+            "dialCode",
+            "phone",
+            "email",
+            "channel",
+            "instagram"
+          ],
+          "additionalProperties": false
+        },
+        "vibe": {
+          "type": "object",
+          "properties": {
+            "moment": {
+              "type": "string",
+              "enum": [
+                "Daytime by the pool",
+                "Horadiso, the sunset hour",
+                "After dark"
+              ]
+            },
+            "music": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Deep and soulful house",
+                  "Melodic and progressive",
+                  "Tech house and techno",
+                  "Disco and nu disco",
+                  "Surprise me"
+                ]
+              },
+              "minItems": 1,
+              "maxItems": 2,
+              "description": "Unique music selections; server must enforce uniqueness.",
+              "uniqueItems": true
+            },
+            "move": {
+              "type": "string",
+              "enum": [
+                "Front of the dance floor",
+                "Drink in hand, gently swaying",
+                "Sunbed and sea views",
+                "A little of everything"
+              ]
+            },
+            "group": {
+              "type": "string",
+              "enum": [
+                "My partner",
+                "A mixed group of friends",
+                "A girls’ day out",
+                "A boys’ day out",
+                "A celebration with my crew"
+              ]
+            },
+            "occasion": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": ""
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "Birthday",
+                    "Anniversary",
+                    "Engagement",
+                    "Business",
+                    "Just because"
+                  ]
+                }
+              ]
+            },
+            "occasionDate": {
+              "type": "string",
+              "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
+              "description": "Empty or a real calendar date; server must reject impossible calendar dates."
+            }
+          },
+          "required": [
+            "moment",
+            "music",
+            "move",
+            "group",
+            "occasion",
+            "occasionDate"
+          ],
+          "additionalProperties": false
+        },
+        "consent": {
+          "type": "object",
+          "properties": {
+            "adult": {
+              "type": "boolean",
+              "const": true
+            },
+            "policy": {
+              "type": "boolean",
+              "const": true
+            },
+            "privacy": {
+              "type": "boolean",
+              "const": true
+            },
+            "marketing": {
+              "type": "boolean"
+            },
+            "policyVersion": {
+              "type": "string",
+              "const": "2026-10-29-draft"
+            },
+            "privacyVersion": {
+              "type": "string",
+              "const": "2026-10-29-draft"
+            }
+          },
+          "required": [
+            "adult",
+            "policy",
+            "privacy",
+            "marketing",
+            "policyVersion",
+            "privacyVersion"
+          ],
+          "additionalProperties": false
+        },
+        "attribution": {
+          "type": "object",
+          "properties": {
+            "utm_source": {
+              "type": "string",
+              "maxLength": 255
+            },
+            "utm_medium": {
+              "$ref": "#/definitions/SOARRegistration/properties/attribution/properties/utm_source"
+            },
+            "utm_campaign": {
+              "$ref": "#/definitions/SOARRegistration/properties/attribution/properties/utm_source"
+            },
+            "referrer": {
+              "type": "string",
+              "maxLength": 2048
+            },
+            "landing_path": {
+              "type": "string",
+              "maxLength": 2048
+            }
+          },
+          "required": [
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "referrer",
+            "landing_path"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "submissionId",
+        "submittedAt",
+        "contact",
+        "vibe",
+        "consent",
+        "attribution"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

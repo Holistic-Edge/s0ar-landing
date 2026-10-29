@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "submissionId": "9a0ea1c7-7972-4cd3-9bdd-22546fb6e0ae",
+  "submittedAt": "2026-10-29T05:04:00.000Z",
+  "contact": {
+    "firstName": "Sample",
+    "lastName": "Guest",
+    "nationality": "Thailand",
+    "residence": "Thailand",
+    "dialCode": "+66",
+    "phone": "000000000",
+    "email": "guest@example.com",
+    "channel": "Email",
+    "instagram": ""
+  },
+  "vibe": {
+    "moment": "Horadiso, the sunset hour",
+    "music": [
+      "Deep and soulful house"
+    ],
+    "move": "A little of everything",
+    "group": "A mixed group of friends",
+    "occasion": "",
+    "occasionDate": ""
+  },
+  "consent": {
+    "adult": true,
+    "policy": true,
+    "privacy": true,
+    "marketing": false,
+    "policyVersion": "2026-10-29-draft",
+    "privacyVersion": "2026-10-29-draft"
+  },
+  "attribution": {
+    "utm_source": "",
+    "utm_medium": "",
+    "utm_campaign": "",
+    "referrer": "",
+    "landing_path": "/"
+  }
+}
