@@ -313,6 +313,15 @@ button,input,select { font: inherit; }
 .footer-bottom > div { display: flex; align-items: center; gap: 22px; }.footer-bottom button { font-size: 11px; }
 .privacy-dialog { width: calc(100% - 32px); max-width: 650px; max-height: 85svh; overflow-y: auto; }
 .privacy-title { font-family: var(--font-display); font-size: 38px; letter-spacing: 0; }
+.review-page { min-height: 100dvh; padding-top: 40px; padding-bottom: 60px; }
+.review-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.review-header h1 { font-size: 42px; margin-top: 12px; }
+.review-header .review-disclaimer { margin-top: 12px; }
+.review-toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0; }
+.review-stage { display: flex; justify-content: center; }
+.review-payload { max-width: 680px; margin: 36px auto 0; min-width: 0; }
+.review-payload h2 { font-size: 30px; }
+.review-payload pre { padding: 20px 0; font-size: 12px; white-space: pre-wrap; overflow-wrap: anywhere; border-top: 1px solid var(--border); margin-top: 16px; }
 .privacy-copy h3 { font-size: 26px; margin: 22px 0 12px; }.privacy-copy p { font-size: 14px; }
 @keyframes gentle-arrival { from {opacity: 0;transform: translateY(12px)} to {opacity: 1;transform: translateY(0)} }
 @keyframes sea-arrival { from {transform: scale(1.04)} to {transform: scale(1)} }
