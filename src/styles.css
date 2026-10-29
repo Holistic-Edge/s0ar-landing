@@ -379,6 +379,14 @@ button,input,select { font: inherit; }
 .auth-field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in oklch, var(--primary) 25%, transparent); }
 .auth-submit { margin-top: 8px; border-radius: 999px; background: var(--primary); color: var(--primary-foreground); text-transform: uppercase; letter-spacing: .18em; font-size: 12px; font-weight: 500; padding: 14px; font-family: 'Work Sans', sans-serif; transition: opacity .2s; }
 .auth-submit:disabled { opacity: .5; }
+.auth-password { position: relative; display: block; }
+.auth-password input { padding-right: 48px; }
+.auth-password button { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 36px; height: 36px; color: color-mix(in oklch, var(--foreground) 55%, transparent); transition: color .2s; }
+.auth-password button:hover { color: var(--primary); }
+.auth-password svg { width: 18px; height: 18px; }
+.auth-note { font-size: 14px; line-height: 1.6; color: color-mix(in oklch, var(--foreground) 70%, transparent); margin: -8px 0 24px; }
+.auth-switch { margin-top: 20px; font-family: 'Work Sans', sans-serif; text-transform: uppercase; letter-spacing: .16em; font-size: 10px; color: color-mix(in oklch, var(--foreground) 65%, transparent); transition: color .2s; }
+.auth-switch:hover { color: var(--primary); }
 .auth-media { width: 60%; height: 100vh; position: relative; overflow: hidden; background: var(--foreground); }
 .auth-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 1s ease-in-out; }
 .auth-media-shade { position: absolute; inset: auto 0 0 0; height: 35%; background: linear-gradient(to bottom, transparent, oklch(0.21 0.06 31 / .7)); pointer-events: none; }
