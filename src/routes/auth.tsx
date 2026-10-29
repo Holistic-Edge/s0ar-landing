@@ -16,7 +16,7 @@ const slides = [
 ];
 
 export const Route = createFileRoute('/auth')({
- validateSearch: (s: Record<string, unknown>) => ({ next: typeof s.next === 'string' ? s.next : undefined }),
+ validateSearch: (s: Record<string, unknown>): { next?: string } => ({ next: typeof s.next === 'string' ? s.next : undefined }),
  head: () => ({ meta: [
   { title: 'SOAR Ocean Club | Admin Access' },
   { name: 'description', content: 'Sign in to the SOAR pre-registration hub.' },

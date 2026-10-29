@@ -40,7 +40,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
    setState({ loading: false, email: user.email ?? '', admin: admin === true });
   })();
  }, []);
- async function signOut() { await supabase.auth.signOut(); navigate({ to: '/auth', replace: true }); }
+ async function signOut() { await supabase.auth.signOut(); navigate({ to: '/auth', search: { next: undefined }, replace: true }); }
 
  if (state.loading) return <div className="min-h-screen flex items-center justify-center"><p className="admin-label text-muted-foreground">Loading admin…</p></div>;
  if (!state.admin) return <div className="admin-scope min-h-screen flex items-center justify-center px-6"><div className="text-center max-w-sm space-y-3">
