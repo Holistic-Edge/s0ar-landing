@@ -446,8 +446,9 @@ button,input,select { font: inherit; }
 .admin-pager { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; }
 .admin-drawer { width: min(520px, 100vw) !important; max-width: none !important; }
 .admin-detail { display: grid; gap: 0; border-top: 1px solid var(--border); }
-.admin-detail > div { display: grid; grid-template-columns: 140px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
-.admin-detail dt { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted-foreground); padding-top: 3px; }
+.admin-detail > div { display: grid; grid-template-columns: 140px 1fr; align-items: center; gap: 12px; min-height: 44px; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.admin-detail dt { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted-foreground); }
+.admin-detail dd { display: flex; align-items: center; min-width: 0; }
 .admin-notes { display: grid; gap: 8px; margin-top: 20px; }
 .admin-notes textarea { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; background: var(--background); font-size: 14px; outline: none; }
 .admin-notes textarea:focus { border-color: var(--primary); }
@@ -460,7 +461,6 @@ button,input,select { font: inherit; }
 .admin-modal .admin-detail { grid-template-columns: 1fr 1fr; column-gap: 40px; }
 .admin-modal .admin-detail > div { grid-template-columns: 170px 1fr; }
 .admin-modal .admin-detail dt { white-space: nowrap; }
-.admin-detail-status dd { padding-top: 2px; }
 .admin-detail-status .admin-segment { max-width: 100%; }
 .admin-detail-status .admin-segment button { height: 30px; padding: 0 10px; font-size: 10px; letter-spacing: .08em; white-space: nowrap; }
 .admin-segment { display: inline-flex; border: 1px solid var(--border); background: var(--card); }
