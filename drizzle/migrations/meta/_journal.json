@@ -15,6 +15,13 @@
       "when": 1793253858252,
       "tag": "0001_admin_access_requests",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793254377354,
+      "tag": "0002_open_admin_access",
+      "breakpoints": true
     }
   ]
 }
