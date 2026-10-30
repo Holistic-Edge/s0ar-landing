@@ -132,7 +132,7 @@ function GuestDetail({ row, position, onPrev, onNext, onUpdate, onDelete }: { ro
  const items: [string, string][] = [
   ['Email', row.email], ['Mobile', `${row.dial_code} ${row.phone}`], ['Best channel', row.channel], ['Instagram', row.instagram ? `@${row.instagram}` : '—'],
   ['Nationality', row.nationality], ['Lives in', row.residence || '—'],
-  ['Moment', row.moment], ['Music', row.music.join(', ')], ['Movement', row.move], ['Company', row.party], ['Occasion', row.occasion || '—'], ['Occasion date', row.occasion_date ?? '—'],
+  ['Moment', row.moment], ['Music', row.music.join(', ')], ['Movement', row.move], ['Company', row.party], ['Occasion', row.occasion || '—'], ['Experience date', row.occasion_date ?? '—'],
   ['Marketing opt-in', row.consent_marketing ? 'Yes' : 'No'], ['Received', new Date(row.created_at).toLocaleString()],
   ['Source', [row.utm_source, row.utm_medium, row.utm_campaign].filter(Boolean).join(' / ') || row.referrer || 'Direct'],
  ];

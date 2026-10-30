@@ -1,14 +1,15 @@
 import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
-import { Link, useNavigate } from '@tanstack/react-router';
-import { ExternalLink, LogOut, Users } from 'lucide-react';
+import { Link, useNavigate, useRouterState } from '@tanstack/react-router';
+import { BarChart3, ExternalLink, LogOut, Users } from 'lucide-react';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger, useSidebar } from '@/components/ui/sidebar';
 import { supabase } from '@/integrations/supabase/client';
 import logoSand from '@/assets/s0ar-horizontal-sand.svg';
 import mantaSand from '@/assets/sand-manta-ray.svg';
 
-const items = [{ title: 'Pre-registrations', url: '/admin', icon: Users }] as const;
+const items = [{ title: 'Pre-registrations', url: '/admin', icon: Users }, { title: 'Analytics', url: '/admin/analytics', icon: BarChart3 }] as const;
 
 function AdminSidebar() {
+ const pathname = useRouterState({ select: state => state.location.pathname });
  const { state } = useSidebar();
  const collapsed = state === 'collapsed';
  return <Sidebar collapsible="icon" variant="floating">
@@ -17,7 +18,7 @@ function AdminSidebar() {
     {collapsed ? <img src={mantaSand} alt="S0AR" className="block mx-auto h-10 w-10"/> : <img src={logoSand} alt="S0AR" className="h-[34px] w-auto"/>}
    </div>
    <SidebarGroup className={collapsed ? 'pt-1 px-0' : 'pt-1'}><SidebarGroupContent><SidebarMenu>
-    {items.map(item => <SidebarMenuItem key={item.url}><SidebarMenuButton asChild isActive tooltip={item.title} className={collapsed ? 'justify-center' : ''}>
+    {items.map(item => <SidebarMenuItem key={item.url}><SidebarMenuButton asChild isActive={pathname === item.url} tooltip={item.title} className={collapsed ? 'justify-center' : ''}>
      <Link to={item.url} className={`flex items-center ${collapsed ? 'justify-center' : 'gap-3'}`}><item.icon className={collapsed ? '!h-5 !w-5' : 'h-4 w-4'} strokeWidth={1.5}/>{!collapsed && <span className="text-sm tracking-wide">{item.title}</span>}</Link>
     </SidebarMenuButton></SidebarMenuItem>)}
    </SidebarMenu></SidebarGroupContent></SidebarGroup>
@@ -29,6 +30,8 @@ function AdminSidebar() {
 }
 
 export function AdminShell({ children }: { children: ReactNode }) {
+ const pathname = useRouterState({ select: state => state.location.pathname });
+ const title = items.find(item => item.url === pathname)?.title ?? 'Admin';
  const navigate = useNavigate();
  const [state, setState] = useState<{ loading: boolean; email: string; admin: boolean }>({ loading: true, email: '', admin: false });
  useEffect(() => {
@@ -55,7 +58,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
    <div className="flex-1 flex flex-col min-w-0">
     <header className="admin-topbar">
      <SidebarTrigger/><div className="h-5 w-px bg-border"/>
-     <nav aria-label="Breadcrumb" className="admin-label text-muted-foreground">Admin <span aria-hidden>/</span> <span className="text-foreground">Pre-registrations</span></nav>
+     <nav aria-label="Breadcrumb" className="admin-label text-muted-foreground">Admin <span aria-hidden>/</span> <span className="text-foreground">{title}</span></nav>
      <div className="ml-auto flex items-center gap-3">
       <span className="hidden sm:inline-flex items-center gap-2 admin-label text-muted-foreground"><span className="admin-pill">Admin</span>{state.email}</span>
       <button onClick={signOut} className="inline-flex items-center gap-1.5 admin-label text-muted-foreground hover:text-destructive"><LogOut className="w-3.5 h-3.5" strokeWidth={1.5}/>Sign out</button>
