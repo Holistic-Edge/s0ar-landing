@@ -19,7 +19,7 @@ export const Route = createFileRoute('/_authenticated/admin_/analytics')({
   { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary' }, { name: 'robots', content: 'noindex, nofollow' },
  ] }),
  pendingComponent: () => <AdminShell><div className="admin-page"><p className="admin-label text-muted-foreground" role="status">Loading analytics…</p></div></AdminShell>,
- errorComponent: ({ error }) => <AdminShell><AnalyticsError message={error.message}/></AdminShell>,
+ errorComponent: ({ error }) => <AdminShell><AnalyticsError message={error instanceof Error ? error.message : 'Could not load analytics.'}/></AdminShell>,
  notFoundComponent: () => <AdminShell><div className="admin-page">Analytics unavailable.</div></AdminShell>,
  component: AnalyticsPage,
 });
