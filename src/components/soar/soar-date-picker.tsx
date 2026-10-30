@@ -22,6 +22,6 @@ export function SoarDatePicker({ label, value, onChange }: { label: string; valu
      className="soar-calendar pointer-events-auto"/>
    </PopoverContent>
   </Popover>
-  {selected && <button type="button" className="soar-date-clear" aria-label="Clear occasion date" onClick={() => onChange('')}><X aria-hidden="true"/></button>}
+  {selected && <button type="button" className="soar-date-clear" aria-label="Clear experience date" onClick={() => onChange('')}><X aria-hidden="true"/></button>}
  </div>;
 }
