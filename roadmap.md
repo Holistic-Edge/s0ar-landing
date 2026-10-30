@@ -13,6 +13,6 @@
 - [x] Self-contained capture: live form saves to Cloud, admin sign-in and pre-registration hub with search, status, notes and CSV export.
 - [x] Add the approved four-photo lifestyle teaser within Find Your Moment, optimize photos, and verify lightbox on desktop/mobile.
 - [x] Widen the lifestyle gallery to match the rhythms, remove expand icons, and verify borderless lightbox with floating glass controls.
-- [ ] Build live registration analytics with curation segments and distributions across all three steps.
-- [ ] Maximize both admin canvases and apply Paul's experience-date and thank-you copy.
-- [ ] Verify analytics, guest views and review screens.
+- [x] Build live registration analytics with curation segments and distributions across all three steps.
+- [x] Maximize both admin canvases and apply Paul's experience-date and thank-you copy.
+- [x] Verify analytics, guest views and review screens.
